@@ -25,11 +25,6 @@ urlpatterns = patterns('',
         ),
         name= 'director_edit'),
 
-    #Delete a director
-    url(r'^directors/(?P<pk>\d+)/delete/$',
-        DirectorDelete.as_view(model=Director),
-        name='director_delete'),
-
     #List all directors
     url(r'^directors/$',
         DirectorList.as_view(),
@@ -58,11 +53,6 @@ urlpatterns = patterns('',
             template_name='form.html'
         ),
         name='actor_edit'),
-
-    #Delete Actor
-    url(r'^actors/(?P<pk>\d+)/delete/$',
-        ActorDelete.as_view(model=Actor),
-        name='actor_delete'),
 
     #List all actors
     url(r'^actors/$',
@@ -94,10 +84,6 @@ urlpatterns = patterns('',
         ),
         name='movie_edit'),
 
-    #Delete a movie
-    url(r'^movies/(?P<pk>\d+)/delete/$',
-        MovieDelete.as_view(model=Movie),
-        name='movie_delete'),
 
     #List all movies : Ex: /filmApplication/films
     url(r'^movies/$',
@@ -129,23 +115,6 @@ urlpatterns = patterns('',
         ),
         name='score_edit'),
 
-    #Delete a review of a movie
-    url(r'^films/(?P<pkf>\d+)/reviews/(?P<pk>\d+)/delete/$',
-        ReviewDelete.as_view(),
-        name='score_delete'),
-
-    #List all reviews of a movie
-    url(r'^films/(?P<pkf>\d+)/reviews$',
-        ReviewList.as_view(),
-        name='review_list'),
-
-    #Detail of a review of a particular movie
-        url(r'^films/(?P<pkf>\d+)/review/(?P<pk>\d+)/$',
-        ReviewDetail.as_view(
-            model = MovieReview,
-            template_name = 'review_detail'
-        ),
-        name='review_detail'),
 
 
 

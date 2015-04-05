@@ -3,7 +3,7 @@ from django.core import urlresolvers
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
@@ -56,11 +56,6 @@ class MovieCreate(LoginRequiredMixin,CreateView):
         return super(MovieCreate, self).form_valid(form)
 
 
-class MovieDelete(LoginRequiredMixin,DeleteView):
-    model = Movie
-    template_name = 'delete.html'
-
-
 class MovieUpdate(LoginRequiredMixin,UpdateView):
     model = Movie
     template_name = 'update.html'
@@ -86,11 +81,6 @@ class ActorCreate(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(ActorCreate, self).form_valid(form)
-
-
-class ActorDelete(LoginRequiredMixin,DeleteView):
-    model = Actor
-    template_name = 'delete.html'
 
 
 class ActorUpdate(LoginRequiredMixin,UpdateView):
@@ -120,11 +110,6 @@ class DirectorCreate(LoginRequiredMixin,CreateView):
         return super(DirectorCreate, self).form_valid(form)
 
 
-class DirectorDelete(LoginRequiredMixin,DeleteView):
-    model = Director
-    template_name = 'delete.html'
-
-
 class DirectorUpdate(LoginRequiredMixin,UpdateView):
     model = Director
     template_name = 'update.html'
@@ -148,25 +133,9 @@ class ReviewCreate(LoginRequiredMixin,CreateView):
         return super(ReviewCreate, self).form_valid(form)
 
 
-class ReviewDelete(LoginRequiredMixin,DeleteView):
-    model = MovieReview
-    template_name = 'delete.html'
-
-
 class ReviewUpdate(LoginRequiredMixin,UpdateView):
     model = MovieReview
     template_name = 'update.html'
-
-
-class ReviewDetail(LoginRequiredMixin,DetailView):
-    model = MovieReview
-    template_name = 'score_detail.html'
-
-
-class ReviewList(LoginRequiredMixin,ListView):
-    model = MovieReview
-    template_name = 'score_list.html'
-    queryset = MovieReview.objects.all()
 
 
 def review(request, pk):
