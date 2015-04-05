@@ -4,15 +4,15 @@
 	{{ actor.name }}
 </h1>
 {% if user.is_staff %}
-	<p><a href="{% url 'filmApplication:update'}"> Edit actor.</a></p>
-	<p><a href="{% url 'filmApplication:delete'}"> Delete Actor.</a></p>
+	<p><a href="{% url 'filmApplication:actor_edit' %}"> Edit actor.</a></p>
+	<p><a href="{% url 'filmApplication:delete_actor' actor.id %}"> Delete Actor.</a></p>
 {% endif %}
 <h2>Information: </h2>
 	<ol>
-		<li><p>Name: {{director.name}}</p></li>
-		<li><p>Birth Year: {{director.birthYear}}</p></li>
-		<li><p>Birth Place: {{director.birthPlace}}</p></li>
-		<li><p>Nationality: {{director.nationality}}</p></li>
+		<li><p>Name: {{actor.name}}</p></li>
+		<li><p>Birth Year: {{actor.birthYear}}</p></li>
+		<li><p>Birth Place: {{actor.birthPlace}}</p></li>
+		<li><p>Nationality: {{actor.nationality}}</p></li>
 	</ol>
 {% endblock %}
 {% block footer %}

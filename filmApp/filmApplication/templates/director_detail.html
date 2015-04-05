@@ -5,7 +5,7 @@
 </h1>
 {% if user.is_staff %}
 	<p><a href="{% url 'filmApplication:update'}"> Edit director.</a></p>
-	<p><a href="{% url 'filmApplication:delete'}"> Delete Director.</a></p>
+	<p><a href="{% url 'filmApplication:delete_director' director.id %}"> Delete director.</a></p>
 {% endif %}
 <h2>Information: </h2>
 	<ol>

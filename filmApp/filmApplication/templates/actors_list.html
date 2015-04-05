@@ -8,7 +8,7 @@
 	{% for actor in actor_list %}
 		<li><a href="{% url 'filmApplication:actor_detail' actor.id %}">
 			{{ actor.name }}</a></li>
-	{% empty %}</li> No actor registered yet! You can add one. </li>
+	{% empty %}<li> No actor registered yet! You can add one. </li>
 	{% endfor %}
 </ul>
 {% endblock %}

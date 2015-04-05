@@ -3,7 +3,7 @@ from django.core import urlresolvers
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView,DeleteView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
@@ -66,6 +66,10 @@ class MovieList(LoginRequiredMixin,ListView):
     template_name = 'movie_list.html'
     queryset = Movie.objects.all()
 
+class MovieDelete(LoginRequiredMixin,DeleteView):
+    model = Movie
+    template_name = 'delete.html'
+    success_url = '/filmApplication/movies/'
 
 #ACTORS
 class ActorDetail(LoginRequiredMixin,DetailView):
@@ -94,6 +98,12 @@ class ActorList(LoginRequiredMixin,ListView):
     queryset = Actor.objects.all()
 
 
+class ActorDelete(LoginRequiredMixin,DeleteView):
+    model = Actor
+    template_name = 'delete.html'
+    success_url = '/filmApplication/actors/'
+
+
 #DIRECTORS
 class DirectorDetail(LoginRequiredMixin,DetailView):
     model = Director
@@ -119,6 +129,11 @@ class DirectorList(LoginRequiredMixin,ListView):
     model = Director
     template_name = 'directors_list.html'
     queryset = Director.objects.all()
+
+class DirectorDelete(LoginRequiredMixin,DeleteView):
+    model = Director
+    template_name = 'delete.html'
+    success_url = '/filmApplication/directors/'
 
 
 #SCORE:

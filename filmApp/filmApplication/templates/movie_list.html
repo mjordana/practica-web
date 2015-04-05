@@ -8,7 +8,7 @@
 	{% for movie in movie_list %}
 		<li><a href="{% url 'filmApplication:movie_detail' movie.id %}">
 			{{ movie.title }}</a></li>
-	{% empty %}</li> No movies registered yet! You can add one </li>
+	{% empty %}<li> No movies registered yet! You can add one </li>
 	{% endfor %}
 </ul>
 {% endblock %}

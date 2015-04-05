@@ -8,7 +8,7 @@
 	{% for director in director_list %}
 		<li><a href="{% url 'filmApplication:director_detail' director.id %}">
 			{{ director.name }}</a></li>
-	{% empty %}</li> No directors registered yet! You can add one </li>
+	{% empty %}<li> No directors registered yet! You can add one </li>
 	{% endfor %}
 </ul>
 {% endblock %}

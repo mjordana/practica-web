@@ -9,7 +9,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    #DIRECTORS urls
+#DIRECTORS urls
 
     # Create a new Director : ex: /filmApplication/directors/create
     url(r'^directors/create/$',
@@ -38,7 +38,14 @@ urlpatterns = patterns('',
         ),
         name='director_detail'),
 
-    #ACTORS urls
+    url(r'^directors/(?P<pk>\d+)/delete/$',
+        DirectorDelete.as_view(
+            model = Director,
+            template_name = 'delete.html'
+        ),
+        name = 'delete_director'),
+
+#ACTORS urls
 
     #Create new actor
     url(r'^actors/create/$',
@@ -67,8 +74,15 @@ urlpatterns = patterns('',
         ),
         name='actor_detail'),
 
+    url(r'^actors/(?P<pk>\d+)/delete/$',
+        ActorDelete.as_view(
+            model = Actor,
+            template_name = 'delete.html'
+        ),
+        name = 'delete_actor'),
 
-    #MOVIES urls
+
+#MOVIES urls
 
     #Create new movie
     url(r'^movies/create/$',
@@ -78,8 +92,8 @@ urlpatterns = patterns('',
     #Edit a movie: Ex: /filmApplication/films/123/edit
     url(r'^movies/(?P<pk>\d+)/edit/$',
         MovieUpdate.as_view(
-            model=Movie,
-            form_class=MovieForm,
+            model = Movie,
+            form_class = MovieForm,
             template_name = 'form.html'
         ),
         name='movie_edit'),
@@ -99,7 +113,14 @@ urlpatterns = patterns('',
         name='movie_detail'),
 
 
-    #SCORE urls
+    url(r'^movies/(?P<pk>\d+)/delete/$',
+        MovieDelete.as_view(
+            model = Movie,
+            template_name = 'delete.html'
+        ),
+        name = 'delete_movie'),
+
+#SCORE urls
 
     #Create new review
     url(r'^films/(?P<pk>\d+)/review/create/$',

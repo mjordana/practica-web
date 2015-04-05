@@ -12,6 +12,7 @@ class Actor(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.name
+
     def get_absolute_url(self):
         return reverse('filmApplication:actor_detail',kwargs={'pk':self.pk})
 
@@ -50,7 +51,7 @@ class Movie(models.Model):
         return u"%s" % self.title
 
     def get_absolute_url(self):
-        return reverse('filmApplication:film_detail',kwargs={'pk':self.pk})
+        return reverse('filmApplication:movie_detail',kwargs={'pk':self.pk})
 
 
 
