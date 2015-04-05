@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
-from models import Movie, Actor, Director, MovieReview
+from models import Movie, Actor, Director, MovieReview,Review
 from forms import MovieForm, DirectorForm, ActorForm, ReviewForm
 
 from django.contrib.auth.decorators import login_required
@@ -42,7 +42,7 @@ class MovieDetail(LoginRequiredMixin,DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(MovieDetail, self).get_context_data(**kwargs)
-        context['RATING_CHOICES'] = MovieReview.RATING_CHOICES
+        context['RATING_CHOICES'] = Review.RATING_CHOICES
         return context
 
 
@@ -63,7 +63,7 @@ class MovieUpdate(LoginRequiredMixin,UpdateView):
 
 class MovieList(LoginRequiredMixin,ListView):
     model = Movie
-    template_name = 'films_list.html'
+    template_name = 'movie_list.html'
     queryset = Movie.objects.all()
 
 

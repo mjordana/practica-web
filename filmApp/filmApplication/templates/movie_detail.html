@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>
+	{{ director.name }}
+</h1>
+{% if user.is_staff %}
+	<p><a href="{% url 'filmApplication:update'}"> Edit movie.</a></p>
+	<p><a href="{% url 'filmApplication:delete'}"> Delete movie.</a></p>
+{% endif %}
+<h2>Information: </h2>
+	<ol>
+		<li><p>Title: {{movie.title}}</p></li>
+		<li><p>Year: {{movie.year}}</p></li>
+		<li><p>Duration: {{movie.duration}}</p></li>
+		<li><p>Genere: {{movie.genre}}</p></li>
+		<li><p>Director: {{movie.director}}</p></li>
+		<li><p>Actors: {{movie.actors}}</p></li>
+	</ol>
+{% endblock %}
+{% block footer %}
+    <p><a href="/filmApplication/movies/">Go back!</a></p>
+{% endblock %}
