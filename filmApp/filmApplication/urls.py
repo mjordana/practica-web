@@ -28,13 +28,13 @@ urlpatterns = patterns('',
     #List all directors
     url(r'^directors/$',
         DirectorList.as_view(),
-        name='director_list'),
+        name='directors_list'),
 
     # Director details: ex: /filmApplication/directors/40
     url(r'^directors/(?P<pk>\d+)/$',
         DirectorDetail.as_view(
             model = Director,
-            template_name = 'directors_detail'
+            template_name = 'director_detail.html'
         ),
         name='director_detail'),
 
@@ -57,13 +57,13 @@ urlpatterns = patterns('',
     #List all actors
     url(r'^actors/$',
         ActorList.as_view(),
-        name='actor_list'),
+        name='actors_list'),
 
     #Actor details: Ex: /filmApplication/actors/40
     url(r'^actors/(?P<pk>\d+)/$',
         ActorDetail.as_view(
             model = Actor,
-            template_name = 'actors_detail'
+            template_name = 'actor_detail.html'
         ),
         name='actor_detail'),
 
@@ -94,7 +94,7 @@ urlpatterns = patterns('',
     url(r'^movies/(?P<pk>\d+)/$',
         MovieDetail.as_view(
             model = Movie,
-            template_name = 'movie_detail'
+            template_name = 'movie_detail.html'
         ),
         name='movie_detail'),
 

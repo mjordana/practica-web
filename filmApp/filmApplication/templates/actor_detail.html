@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>
+	{{ actor.name }}
+</h1>
+{% if user.is_staff %}
+	<p><a href="{% url 'filmApplication:update'}"> Edit actor.</a></p>
+	<p><a href="{% url 'filmApplication:delete'}"> Delete Actor.</a></p>
+{% endif %}
+<h2>Information: </h2>
+	<ol>
+		<li><p>Name: {{director.name}}</p></li>
+		<li><p>Birth Year: {{director.birthYear}}</p></li>
+		<li><p>Birth Place: {{director.birthPlace}}</p></li>
+		<li><p>Nationality: {{director.nationality}}</p></li>
+	</ol>
+{% endblock %}
+{% block footer %}
+    <p><a href="{% url 'filmApplication:actors_list'}">Go Back</a></p>
+{% endblock %}
