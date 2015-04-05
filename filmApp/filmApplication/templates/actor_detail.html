@@ -4,7 +4,7 @@
 	{{ actor.name }}
 </h1>
 {% if user.is_staff %}
-	<p><a href="{% url 'filmApplication:actor_edit' %}"> Edit actor.</a></p>
+	<p><a href="{% url 'filmApplication:actor_edit' actor.id %}"> Edit actor.</a></p>
 	<p><a href="{% url 'filmApplication:delete_actor' actor.id %}"> Delete Actor.</a></p>
 {% endif %}
 <h2>Information: </h2>
