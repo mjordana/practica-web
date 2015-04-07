@@ -156,10 +156,10 @@ class ReviewUpdate(LoginRequiredMixin,UpdateView):
 def review(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     new_review = MovieReview(
-        rating=request.POST['rating'],
-        comment=request.POST['comment'],
-        user=request.user,
-        movie=movie,
+        rating = request.POST['rating'],
+        comment = request.POST['comment'],
+        user = request.user,
+        movie = movie
     )
     new_review.save()
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))

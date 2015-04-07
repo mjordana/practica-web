@@ -47,6 +47,18 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), '../templates'),
 )
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+# Requerido por django.contrib.sites
+SITE_ID = 1
+
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../media")

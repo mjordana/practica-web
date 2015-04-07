@@ -4,8 +4,9 @@
 	{{ director.name }}
 </h1>
 {% if user.is_staff %}
-	<p><a href="{% url 'filmApplication:movie_edit' movie.id %}"> Edit movie.</a></p>
+	<p><a href="{% url 'filmApplication:movie_edit' movie.id %}"> Edit movie</a></p>
 	<p><a href="{% url 'filmApplication:delete_movie' movie.id %}"> Delete movie.</a></p>
+
 {% endif %}
 <h2>Information: </h2>
 	<ol>
@@ -14,8 +15,29 @@
 		<li><p>Duration: {{movie.duration}}</p></li>
 		<li><p>Genere: {{movie.genre}}</p></li>
 		<li><p>Director: {{movie.director}}</p></li>
-		<li><p>Actors: {{movie.actors}}</p></li>
+		<li><p><p>Actors:</p>
+				<ul>
+				{% for actor in movie.actors.all %}
+					<li><p><span property="actor">{{actor.name}}</span></p></li>
+				{% endfor %}
+				</ul>
+
+            </p></li>
 	</ol>
+
+
+
+    {%if user.is_authenticated %}
+        <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
+			{% csrf_token %}
+            <p>Review: <textarea name="comment" id="comment" rows="4"></textarea></p>
+			<p>Rating: (Choose a qualification between 1 and 5) <textarea name="rating" id="rating" rows="1"></textarea></p>
+			<input type="submit" value="Add"/>
+		</form>
+    {% endif %}
+
+
+
 {% endblock %}
 {% block footer %}
     <p><a href="/filmApplication/movies/">Go back!</a></p>

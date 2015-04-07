@@ -123,8 +123,9 @@ urlpatterns = patterns('',
 #SCORE urls
 
     #Create new review
-    url(r'^films/(?P<pk>\d+)/review/create/$',
+    url(r'^films/(?P<pk>\d+)/create_review/$',
         'filmApplication.views.review',
+
         name='review_create'),
 
     #Edit a review of a movie
@@ -134,9 +135,7 @@ urlpatterns = patterns('',
             form_class=ReviewForm,
             template_name = 'form.html'
         ),
-        name='score_edit'),
-
-
+        name='review_edit'),
 
 
 )

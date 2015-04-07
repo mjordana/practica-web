@@ -58,7 +58,7 @@ class Movie(models.Model):
 class Review(models.Model):
 
     RATING_CHOICES = ((1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5'))
-    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3,
+    rating = models.PositiveSmallIntegerField('rating (stars)', blank=False, default=3,
 		choices=RATING_CHOICES)
     comment = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, default=1)
@@ -68,7 +68,7 @@ class Review(models.Model):
         abstract = True
 
 
-class MovieReview(models.Model):
+class MovieReview(Review):
     movie = models.ForeignKey(Movie)
     def get_absolute_url(self):
         return reverse('filmApplication:movie_detail',kwargs={'pk':self.movie.pk})
