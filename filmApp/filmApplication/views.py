@@ -207,3 +207,4 @@ def home(request):
     'mainpage.html',
     { 'user': request.user }
     )
+

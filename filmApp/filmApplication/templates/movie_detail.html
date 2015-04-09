@@ -13,7 +13,7 @@
 		<li><p>Title: {{movie.title}}</p></li>
 		<li><p>Year: {{movie.year}}</p></li>
 		<li><p>Duration: {{movie.duration}}</p></li>
-		<li><p>Genere: {{movie.genre}}</p></li>
+		<li><p>Genre: {{movie.genre}}</p></li>
 		<li><p>Director: {{movie.director}}</p></li>
 		<li><p><p>Actors:</p>
 				<ul>
@@ -26,13 +26,13 @@
 	</ol>
 
 
-
     {%if user.is_authenticated %}
         <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
 			{% csrf_token %}
             <p>Review: <textarea name="comment" id="comment" rows="4"></textarea></p>
 			<p>Rating: (Choose a qualification between 1 and 5) <textarea name="rating" id="rating" rows="1"></textarea></p>
 			<input type="submit" value="Add"/>
+
 		</form>
     {% endif %}
 
