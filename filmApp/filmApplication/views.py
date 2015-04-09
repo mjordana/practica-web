@@ -8,10 +8,14 @@ from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
 from models import Movie, Actor, Director, MovieReview,Review
-from forms import MovieForm, DirectorForm, ActorForm, ReviewForm
+from forms import MovieForm, DirectorForm, ActorForm, ReviewForm,RegistrationForm
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
+from django.template import RequestContext
+from django.contrib.auth import logout
+
 
 
 class LoginRequiredMixin(object):
@@ -163,3 +167,43 @@ def review(request, pk):
     )
     new_review.save()
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))
+
+
+#REGISTER PART
+@csrf_protect
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password1'],
+            email=form.cleaned_data['email']
+            )
+            return HttpResponseRedirect('/register/success/')
+    else:
+        form = RegistrationForm()
+    variables = RequestContext(request, {
+    'form': form
+    })
+
+    return render_to_response(
+    'registration/register.html',
+    variables,
+    )
+
+def register_success(request):
+    return render_to_response(
+    'registration/success.html',
+    )
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+@login_required
+def home(request):
+    return render_to_response(
+    'mainpage.html',
+    { 'user': request.user }
+    )

@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     url(r'^filmApplication/', include('filmApplication.urls', namespace='filmApplication')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-
+    url(r'^register/$', register),
+    url(r'^register/success/$', register_success),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
