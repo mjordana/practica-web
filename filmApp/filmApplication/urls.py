@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from filmApplication.models import Actor, Director, Movie
+from filmApplication.models import Actor, Director, Movie, Genre
 from filmApplication.forms import ActorForm, DirectorForm, MovieForm, ReviewForm
 from filmApplication.views import *
 from django.contrib import admin
@@ -137,5 +137,11 @@ urlpatterns = patterns('',
         ),
         name='review_edit'),
 
+    #Genre urls
 
+    #List all actors
+    url(r'^genre/$',
+        GenreList.as_view(),
+        name='genre'),
+   
 )

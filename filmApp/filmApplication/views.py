@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView,DeleteView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
-from models import Movie, Actor, Director, MovieReview,Review
+from models import Movie, Actor, Director, MovieReview, Review, Genre
 from forms import MovieForm, DirectorForm, ActorForm, ReviewForm,RegistrationForm
 
 from django.contrib.auth.decorators import login_required
@@ -168,6 +168,11 @@ def review(request, pk):
     new_review.save()
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))
 
+#Genre
+class GenreList(LoginRequiredMixin,ListView):
+    model = Genre
+    template_name = 'genre.html'
+    queryset = Genre.objects.all()
 
 #REGISTER PART
 @csrf_protect
