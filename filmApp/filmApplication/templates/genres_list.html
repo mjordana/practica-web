@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+	MOVIE GENRES AVAILABLE
+</h1>
+<ul>
+	{% for genre in genre_list %}
+		<li><a href="{% url 'filmApplication:genres_detail' genre.id %}">
+			{{ genre.genre }}</a></li>
+	{% endfor %}
+</ul>
+{% endblock %}
+
+{% block footer %}
+    <p><a href="/">Go back!</a></p>
+{% endblock %}
+
+
+

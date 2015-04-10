@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>
-	{{ director.name }}
+	{{ movie.name }}
 </h1>
 {% if user.is_staff %}
 	<p><a href="{% url 'filmApplication:movie_edit' movie.id %}"> Edit movie</a></p>
@@ -32,10 +32,8 @@
             <p>Review: <textarea name="comment" id="comment" rows="4"></textarea></p>
 			<p>Rating: (Choose a qualification between 1 and 5) <textarea name="rating" id="rating" rows="1"></textarea></p>
 			<input type="submit" value="Add"/>
-
 		</form>
     {% endif %}
-
 
 
 {% endblock %}

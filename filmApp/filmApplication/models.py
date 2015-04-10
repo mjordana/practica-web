@@ -37,7 +37,10 @@ class Genre(models.Model):
     genre = models.CharField(max_length=15,choices=tipus,unique=True)
 
     def __unicode__(self):
-        return self.genre
+        return u"%s" % self.genre
+
+    def get_absolute_url(self):
+        return reverse('filmApplication:genres_detail',kwargs={'pk':self.pk})
 
 class Movie(models.Model):
     title = models.TextField(max_length = 50)

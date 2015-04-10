@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from filmApplication.models import Movie, Director, Actor, Review
+from filmApplication.models import Movie, Director, Actor, Review, Genre
 
 class MovieForm(ModelForm):
     class Meta:
@@ -12,6 +12,11 @@ class MovieForm(ModelForm):
 class DirectorForm(ModelForm):
     class Meta:
         model = Director
+        exclude = ('user',)
+
+class GenreForm(ModelForm):
+    class Meta:
+        model = Genre
         exclude = ('user',)
 
 class ActorForm(ModelForm):
