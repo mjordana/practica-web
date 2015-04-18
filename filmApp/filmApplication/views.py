@@ -185,6 +185,10 @@ class GenreDetail(LoginRequiredMixin, DetailView):
     model = Genre
     template_name = 'genres_detail.html'
 
+class MovieList2(LoginRequiredMixin,ListView):
+    model = Movie
+    template_name = 'genres_detail.html'
+    queryset = Movie.objects.all()
 
 #-------------------------------------------------------------------
 #REGISTER PART
