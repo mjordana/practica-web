@@ -136,27 +136,4 @@ urlpatterns = patterns('',
             template_name = 'form.html'
         ),
         name='review_edit'),
-
-#GENRES --> ONLY ADMINS CAN CREATE NEW GENRE
-
-    #List all movies : Ex: /filmApplication/films
-    url(r'^genres/$',
-        GenreList.as_view(),
-        name='genres_list'),
-
-    #Detail of a genre: Movies of a concrete genre
-    url(r'^genre/movies/(?P<pk>\d+)/$',
-        GenreDetail.as_view(
-            model = Genre,
-            template_name = 'genres_detail.html'
-        ),
-        name='genres_detail'),
-
-    url(r'^/$',
-        MovieList2.as_view(
-            model = Genre,
-            template_name = 'genres_detail.html'
-        ),
-        name='movie_list2'),
-
 )

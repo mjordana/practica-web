@@ -168,28 +168,6 @@ def review(request, pk):
     new_review.save()
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))
 
-#Genre
-class GenreList(LoginRequiredMixin,ListView):
-    model = Genre
-    template_name = 'genre.html'
-    queryset = Genre.objects.all()
-
-#GENRES : Only admin create and delete genres not users
-class GenreList(LoginRequiredMixin, ListView):
-
-    model = Genre
-    template_name = 'genres_list.html'
-    queryset = Genre.objects.all()
-
-class GenreDetail(LoginRequiredMixin, DetailView):
-    model = Genre
-    template_name = 'genres_detail.html'
-
-class MovieList2(LoginRequiredMixin,ListView):
-    model = Movie
-    template_name = 'genres_detail.html'
-    queryset = Movie.objects.all()
-
 #-------------------------------------------------------------------
 #REGISTER PART
 @csrf_protect
