@@ -156,6 +156,10 @@ class ReviewUpdate(LoginRequiredMixin,UpdateView):
     model = MovieReview
     template_name = 'update.html'
 
+class ReviewDelete(LoginRequiredMixin,DeleteView):
+    model = MovieReview
+    template_name = 'delete.html'
+
 
 def review(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
@@ -167,6 +171,7 @@ def review(request, pk):
     )
     new_review.save()
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))
+
 
 #-------------------------------------------------------------------
 #REGISTER PART

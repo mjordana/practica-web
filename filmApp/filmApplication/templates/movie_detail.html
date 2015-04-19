@@ -40,6 +40,11 @@
 
 <ul rel="review">
     {% for review in movie.moviereview_set.all %}
+    {% if user == review.user %}
+	    <p><a href="{% url 'filmApplication:review_edit' review.id %}"> Edit review.</a></p>
+	    <p><a href="{% url 'filmApplication:delete_review' review.id %}"> Delete review.</a></p>
+    {% endif %}
+
         <li typeof="Review">
             <p rel="reviewRating" typeof="Rating">
                 <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>

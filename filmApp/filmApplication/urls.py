@@ -123,17 +123,25 @@ urlpatterns = patterns('',
 #SCORE urls
 
     #Create new review
-    url(r'^films/(?P<pk>\d+)/create_review/$',
+    url(r'^movies/(?P<pk>\d+)/create_review/$',
         'filmApplication.views.review',
 
         name='review_create'),
 
-    #Edit a review of a movie
-    url(r'^films/(?P<pkf>\d+)/reviews/(?P<pk>\d+)/edit/$',
+    #Edit a review of a movie if we are the owners
+    url(r'^reviews/(?P<pk>\d+)/edit/$',
         ReviewUpdate.as_view(
             model=MovieReview,
             form_class=ReviewForm,
             template_name = 'form.html'
         ),
         name='review_edit'),
+
+    #Delete a review of a movie if we are the owners
+    url(r'^reviews/(?P<pk>\d+)/delete/$',
+        MovieDelete.as_view(
+            model = MovieReview,
+            template_name = 'delete.html'
+        ),
+        name = 'delete_review'),
 )
