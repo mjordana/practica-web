@@ -1,15 +1,16 @@
 {% extends "base.html"%}
 
 {% block content %}
-
-<form method="post" action="">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-	<h2> Do you really want to delete it?</h2>
-        <input type="submit" value="Yes"/>
-        <input type="button" onclick="history.back()" value="No"/>
-</form>
+	<div style="position: fixed; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 155px; left: 50px; z-index: 2;text-align: left;">
+		<form method="post" action="">
+		        {% csrf_token %}
+		        <table>
+		            {{ form.as_table }}
+		        </table>
+			<h2> Do you really want to delete it?</h2>
+		        <input type="submit" value="Yes"/>
+		        <input type="button" onclick="history.back()" value="No"/>
+		</form>
+	</div>
 
 {% endblock %}

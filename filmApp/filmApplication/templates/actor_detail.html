@@ -1,21 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-	{{ actor.name }}
-</h1>
-{% if user.is_staff %}
-	<p><a href="{% url 'filmApplication:actor_edit' actor.id %}"> Edit actor.</a></p>
-	<p><a href="{% url 'filmApplication:delete_actor' actor.id %}"> Delete Actor.</a></p>
-{% endif %}
-<h2>Information: </h2>
-	<ol>
-		<li><p>Name: {{actor.name}}</p></li>
-		<li><p>Birth Year: {{actor.birthYear}}</p></li>
-		<li><p>Birth Place: {{actor.birthPlace}}</p></li>
-		<li><p>Nationality: {{actor.nationality}}</p></li>
+	<div style="position: fixed; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 155px; left: 50px; z-index: 2;text-align: left;">
+		<h1>
+			{{ actor.name }}
+		</h1>
+		{% if user.is_staff %}
+			<p>
+				<button style="color: #ACFA58;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;">
+					<a href="{% url 'filmApplication:actor_edit' actor.id %}" style="text-decoration:none;color:black">
+						Edit actor.
+					</a>
+				&nbsp;&nbsp;
+				<button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">
+					<a href="{% url 'filmApplication:delete_actor' actor.id %}" style="text-decoration:none;color:black">
+						Delete Actor.
+					</a>
+				</button>
+			</p>
+		{% endif %}
+		<h2>Information: </h2>
+			<ol>
+				<p>Name: {{actor.name}}</p>
+				<p>Birth Year: {{actor.birthYear}}</p>
+				<p>Birth Place: {{actor.birthPlace}}</p>
+				<p>Nationality: {{actor.nationality}}</p>
+			</ol>
+		<br>
 
-	</ol>
+		</br>
+		<button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;"> 
+		    <p>
+		    	<a href="/filmApplication/actors/" style="text-decoration:none;color:black">
+		    		Go back!
+		    	</a>
+		    </p>
+		</button>
+
+	</div>
 {% endblock %}
 {% block footer %}
-    <p><a href="/filmApplication/actors/">Go back!</a></p>
+
 {% endblock %}
