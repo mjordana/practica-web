@@ -7,7 +7,14 @@
 <div id="header">
     {% block header %}
         {% if user.username %}
-            <p>User {{ user.username }} (<a href="/accounts/logout/?next=/">logout</a>)</p>
+            <p>
+                User {{ user.username }} 
+                <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
+                    <a href="/accounts/logout/?next=/" style="text-decoration:none;color:black">
+                        logout
+                    </a>
+                </button>
+            </p>
         {% else %}
             <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
                 <p>
@@ -68,6 +75,14 @@
                     <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
                         <a href="filmApplication/directors/" style="text-decoration:none;color:black">
                             Directors
+                        </a>
+                    </button>
+                </li>
+
+                <li style="list-style-type:none;float:left;margin-left:40px;margin-right:40px;text-align:center;padding-top:15px;">
+                   <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
+                        <a href="filmApplication/genres/" style="text-decoration:none;color:black">
+                            List of genres
                         </a>
                     </button>
                 </li>

@@ -81,6 +81,18 @@ urlpatterns = patterns('',
         ),
         name = 'delete_actor'),
 
+    #List all movies : Ex: /filmApplication/films
+    url(r'^genres/$',
+        GenreList.as_view(),
+        name='genres_list'),
+
+    #Detail of a genre: Movies of a concrete genre
+    url(r'^genre/(?P<pk>\d+)/movies/$',
+        GenreDetail.as_view(
+            model = Genre,
+            template_name = 'genres_detail.html'
+        ),
+        name='genres_detail'),
 
 #MOVIES urls
 

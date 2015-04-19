@@ -3,14 +3,8 @@
 <h1>
 	{{genre.genre}}
 </h1>
-    <p>{% if user.is_authenticated %}<a href="{% url 'filmApplication:movie_create' %}">Add new movie!</a>{% endif %}</p>
-<ul>
-	{% for movie in movie_list2 %}
-		<li><a href="{% url 'filmApplication:movie_detail' movie.id %}">
-			{{ movie.title }}</a></li>
-	{% empty %}<li> No movies registered yet! You can add one </li>
-	{% endfor %}
-</ul>
+
+
 {% endblock %}
 {% block footer %}
     <p><a href="/">Go back!</a></p>
