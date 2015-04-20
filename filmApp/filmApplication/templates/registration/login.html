@@ -5,7 +5,7 @@
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
-    <div style="position: fixed; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 155px; left: 50px; z-index: 2;text-align: left;">
+    <div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 20px; left: -160px; z-index: 2;text-align: left;">
         <form method="post" action=".">{% csrf_token %}
             <table border="0">
                 <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>

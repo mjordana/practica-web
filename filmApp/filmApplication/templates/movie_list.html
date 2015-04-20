@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-	<div style="position: fixed; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 155px; left: 50px; z-index: 2">
+	<div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 20px; left: -160px; z-index: 2;text-align: left;">
 		<h1>
 			MOVIES LIST
 		</h1>
 	    <p>
 	    	{% if user.is_authenticated %}
-		    	<button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">	
+		    	<button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;">	
 		    		<a href="{% url 'filmApplication:movie_create' %}" style="text-decoration:none;color:black">
 		    			Add new movie!
 		    		</a>

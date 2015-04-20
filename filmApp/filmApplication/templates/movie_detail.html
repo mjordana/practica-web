@@ -1,84 +1,131 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-	{{ movie.name }}
-</h1>
-{% if user.is_staff %}
-	<p><a href="{% url 'filmApplication:movie_edit' movie.id %}"> Edit movie</a></p>
-	<p><a href="{% url 'filmApplication:delete_movie' movie.id %}"> Delete movie.</a></p>
+    <div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 20px; left: -160px; z-index: 2;text-align: left;">
+        <h1>
+    	   {{ movie.name }}
+        </h1>
+        
+        {% if user.is_staff %}
+    	   <p>
+                <button style="color: #ACFA58;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;"> 
+                    <a href="{% url 'filmApplication:movie_edit' movie.id %}" style="text-decoration:none;color:black">
+                        Edit movie
+                    </a>
+                </button>
+                &nbsp;&nbsp;
+                <button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">
+        	        <a href="{% url 'filmApplication:delete_movie' movie.id %}" style="text-decoration:none;color:black">
+                        Delete movie.
+                    </a>
+                </button>
+            </p>
+        {% endif %}
 
-{% endif %}
-<h2>Information: </h2>
-	<ol>
-		<li><p>Title: {{movie.title}}</p></li>
-		<li><p>Year: {{movie.year}}</p></li>
-		<li><p>Duration: {{movie.duration}}</p></li>
-		<li><p>Genre: {{movie.genre}}</p></li>
-		<li><p>Director: {{movie.director}}</p></li>
-		<li><p><p>Actors:</p>
-				<ul>
-				{% for actor in movie.actors.all %}
-					<li><p><span property="actor">{{actor.name}}</span></p></li>
-				{% endfor %}
-				</ul>
+        <h2>Information: </h2>
+        	<ol>
+        		<p>Title: {{movie.title}}</p>
+        		<p>Year: {{movie.year}}</p>
+        		<p>Duration: {{movie.duration}}</p>
+        		<p>Genre: {{movie.genre}}</p>
+    	        <p>Director:
+                    <a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="text-decoration:none;color:blue">
+                        {{movie.director}}
+                    </a>
+                </p>
+        		<p><p>Actors:</p>
+        				<ul>
+        				{% for actor in movie.actors.all %}
+        					<p><span property="actor">
+                                <a href="{% url 'filmApplication:actor_detail' actor.id %}" style="text-decoration:none;color:blue">
+                                    {{actor.name}}
+                                </a>
+                            </span></p>
+        				{% endfor %}
+        				</ul>
 
-            </p></li>
-	</ol>
-
-
-<h2>Reviews</h2>
-{% if movie.moviereview_set.all|length > 0 %}
-<span rel="aggregateRating">
-    <p typeof="AggregateRating">
-        Average rating <span property="ratingValue">{{ movie.averageRating|stringformat:".1f" }}</span>
-        {% with movie.moviereview_set.all|length as reviewCount %}
-        from <span property="reviewCount">{{ reviewCount }}</span> review{{ reviewCount|pluralize }}
-        {% endwith %}
-    </p>
-</span>
+                    </p></li>
+        	</ol>
 
 
-<ul rel="review">
-    {% for review in movie.moviereview_set.all %}
-    {% if user == review.user %}
-	    <p><a href="{% url 'filmApplication:review_edit' review.id %}"> Edit review.</a></p>
-	    <p><a href="{% url 'filmApplication:delete_review' review.id %}"> Delete review.</a></p>
-    {% endif %}
-
-        <li typeof="Review">
-            <p rel="reviewRating" typeof="Rating">
-                <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
-                <span property="ratingValue">{{ review.rating }}</span> star{{ review.rating|pluralize }}
-                {% with RATING_CHOICES|last as best %}
-                <span property="bestRating" content="{{ best.0 }}"></span>
+        <h2>Reviews</h2>
+        
+        {% if movie.moviereview_set.all|length > 0 %}
+        <span rel="aggregateRating">
+            <p typeof="AggregateRating">
+                Average rating <span property="ratingValue">{{ movie.averageRating|stringformat:".1f" }}</span>
+                {% with movie.moviereview_set.all|length as reviewCount %}
+                from <span property="reviewCount">{{ reviewCount }}</span> review{{ reviewCount|pluralize }}
                 {% endwith %}
             </p>
-            <p property="description">{{ review.comment }}</p>
-            <p>Created by <span property="author">{{ review.user }}</span> on
-                <span property="publishDate">{{ review.date}}</span></p>
-        </li>
-    {% endfor %}
-</ul>
+        </span>
 
-</span>
-{% endif %}
 
-<h3>Add Review</h3>
-<form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
-    {% csrf_token %}
-    Message: <textarea name="comment" id="comment" rows="4"></textarea>
-    <p>Rating:</p>
-    <p>
-    {% for rate in RATING_CHOICES %}
-        <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
-        <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br />
-    {% endfor %}
-    </p>
-    <input type="submit" value="Add" />
-</form>
+        <ul rel="review">
+            {% for review in movie.moviereview_set.all %}
+                <div style="border: 3px solid #FFF;width: 350px;">
+                    {% if user == review.user %}
+                	    <p>
+                            <button style="color: #ACFA58;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;">    
+                                <a href="{% url 'filmApplication:review_edit' review.id %}" style="text-decoration:none;color:black">
+                                    Edit review.
+                                </a>
+                            </button>
+                            &nbsp;&nbsp;
+                            <button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">
+                    	        <a href="{% url 'filmApplication:delete_review' review.id %}" style="text-decoration:none;color:black">
+                                    Delete review.
+                                </a>
+                            </button>
+                        </p>
+                    {% endif %}
+                
+                        <p rel="reviewRating" typeof="Rating">
+                            <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
+                            <span property="ratingValue">{{ review.rating }}</span> star{{ review.rating|pluralize }}
+                            {% with RATING_CHOICES|last as best %}
+                            <span property="bestRating" content="{{ best.0 }}"></span>
+                            {% endwith %}
+                        </p>
+                        <p property="description">{{ review.comment }}</p>
+                        <p>Created by <span property="author">{{ review.user }}</span> on
+                        <span property="publishDate">{{ review.date}}</span></p>
 
-{% endblock %}
+                </div>
+                &nbsp;
+            {% endfor %}
+        </ul>
+
+        </span>
+        {% endif %}
+        
+        <h3>Add Review</h3>
+        <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
+            {% csrf_token %}
+                <textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Mesage...</textarea>
+                <p>Rating:</p>
+                <p>
+            {% for rate in RATING_CHOICES %}
+            <li style="list-style-type:none;float:left;margin-left:40px;margin-right:40px;text-align:center;padding-top:15px;">
+                <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
+
+                <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br /></li>
+            {% endfor %}
+            </p></br></br></br>
+            <input type="submit" value="Add" />
+        </form>
+        <br>
+
+        </br>
+        <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;"> 
+            <p>
+                <a href="/filmApplication/movies/" style="text-decoration:none;color:black">
+                    Go back!
+                </a>
+            </p>
+        </button>
+    </div>
+    {% endblock %}
 
 {% block footer %}
-    <p><a href="/filmApplication/movies/">Go back!</a></p>
+
 {% endblock %}
