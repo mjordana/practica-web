@@ -4,8 +4,15 @@
 	{{genre.genre}}
 </h1>
 
+<ul>
+    {% for movie in movies_by_genre_list %}
+        <li><a href="{% url 'filmApplication:movie_detail' movie.id %}">{{ movie.title }}</a></li>
+    {% empty %}
+        <li>Sorry, no movies registered yet in this genre.</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
 {% block footer %}
-    <p><a href="/">Go back!</a></p>
+    <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
 {% endblock %}
