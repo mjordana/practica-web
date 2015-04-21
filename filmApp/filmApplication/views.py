@@ -1,17 +1,16 @@
 # Create your views here.
 from django.core import urlresolvers
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response,render
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView,DeleteView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
-from django.utils import timezone
 
 from models import Movie, Actor, Director, MovieReview,Review,Genre
 from forms import MovieForm, DirectorForm, ActorForm, ReviewForm,RegistrationForm
-from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.base import TemplateResponseMixin,TemplateResponse
 from django.core import serializers
 
 from django.contrib.auth.decorators import login_required
@@ -43,6 +42,7 @@ def mainpage(request):
     return HttpResponse(output)
 
 
+#Parser to XML and JSON
 class ConnegResponseMixin(TemplateResponseMixin):
 
     def render_json_object_response(self, objects, **kwargs):
@@ -68,7 +68,7 @@ class ConnegResponseMixin(TemplateResponseMixin):
 
 
 # MOVIE:
-class MovieDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
+class MovieDetail(LoginRequiredMixin,DetailView, ConnegResponseMixin):
     model = Movie
     template_name = 'movie_detail.html'
 
@@ -201,20 +201,28 @@ def review(request, pk):
     return HttpResponseRedirect(urlresolvers.reverse('filmApplication:movie_detail', args=(movie.id,)))
 
 
-
 #GENRES : Only admin create and delete genres not users
 class GenreList(LoginRequiredMixin, ListView, ConnegResponseMixin):
     model = Genre
     template_name = 'genres_list.html'
-    queryset = Genre.objects.filter()
+    queryset = Genre.objects.all()
+
 
 
 class GenreDetail(LoginRequiredMixin, DetailView, ConnegResponseMixin):
     model = Genre
-    queryset = Movie.objects.all()
-    context_object_name = 'movies_by_genre_list'
-    template_name = 'genres_detail.html'
 
+    def get(self, request, *args, **kwargs):
+        return render(request, self.get_template_name(),self.get_context_data())
+
+    def get_template_name(self):
+        return 'genres_detail.html'
+
+    def get_context_data(self):
+        return {'queryset': self.get_object()}
+
+    def get_object(self):
+        return Movie.objects.filter(genre__id=self.kwargs['pk'])
 
 
 #-------------------------------------------------------------------

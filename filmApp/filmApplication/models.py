@@ -34,13 +34,14 @@ class Genre(models.Model):
     tipus = (('comedy','comedy'),('action','action'),('drama','drama'),('terror','terror'),
         ('fantasy','fantasy'),('thriller','thriller'),('aventura','aventura'),('scienceFiction','scienceFiction'),
 	    ('western','western'))
-    genre = models.TextField(max_length=15,choices=tipus,unique=True)
+    genre = models.CharField(max_length=15,choices=tipus,unique=True)
 
     def __unicode__(self):
         return u"%s" % self.genre
 
     def get_absolute_url(self):
         return reverse('filmApplication:genres_detail',kwargs={'pk':self.pk})
+
 
 class Movie(models.Model):
     title = models.TextField(max_length = 50)

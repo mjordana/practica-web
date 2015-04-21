@@ -115,17 +115,17 @@ urlpatterns = patterns('',
 
 
     #Detail of a genre: Movies of a concrete genre
-    url(r'^genre/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
+    url(r'^genres/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
         GenreDetail.as_view(
             model = Genre,
         ),
         name='genres_detail_conneg'),
 
     #Detail of a genre: Movies of a concrete genre
-    url(r'^genre/(?P<pk>\d+)/$',
+    url(r'^genres/(?P<pk>\d+)/$',
         GenreDetail.as_view(
             model = Genre,
-            template_name = 'genres_detail.html'
+            template_name = 'genres_detail.html',
         ),
         name='genres_detail'),
 

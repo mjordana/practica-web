@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>
-	{{genre.genre}}
+	AVAILABLE MOVIES
 </h1>
 
 <ul>
-    {% for movie in movies_by_genre_list %}
+    {% for movie in queryset %}
         <li><a href="{% url 'filmApplication:movie_detail' movie.id %}">{{ movie.title }}</a></li>
     {% empty %}
-        <li>Sorry, no movies registered yet in this genre.</li>
+        <li>Sorry, no movies in this genre registered yet.</li>
     {% endfor %}
+
+
 </ul>
 
 {% endblock %}
