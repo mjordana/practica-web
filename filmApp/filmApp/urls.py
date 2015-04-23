@@ -22,8 +22,9 @@ urlpatterns = patterns('',
     url(r'^', mainpage, name='home'),
 )
 
-if settings.DEBUG:
+
+if settings.DEBUG and settings.STATIC_ROOT:
     urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT, }),
-        )
+        (r'%s(?P<path>.*)$' % settings.STATIC_URL.lstrip('/'), 
+            'django.views.static.serve',
+            {'document_root' : settings.STATIC_ROOT }),)

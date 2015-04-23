@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-	<div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 20px; left: -160px; z-index: 2;text-align: left;">
-		<h1>
-			MOVIES LIST
-		</h1>
+	<div id = "contingut">
+		<h1>MOVIES LIST</h1>
 	    <p>
 	    	{% if user.is_authenticated %}
-		    	<button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;">	
-		    		<a href="{% url 'filmApplication:movie_create' %}" style="text-decoration:none;color:black">
+		    	<button id = "b1">	
+		    		<a href="{% url 'filmApplication:movie_create' %}">
 		    			Add new movie!
 		    		</a>
 		    	</button>
@@ -16,25 +14,17 @@
 		<ul>
 			{% for movie in movie_list %}
 				<li>
-					<a href="{% url 'filmApplication:movie_detail' movie.id %}" style="text-decoration:none;color:black">
+					<a href="{% url 'filmApplication:movie_detail' movie.id %}">
 						{{ movie.title }}
 					</a>
 				</li>
 				{% empty %}
-				<li> 
-					No movies registered yet! You can add one 
-				</li>
+				<li> No movies registered yet! You can add one </li>
 			{% endfor %}
 		</ul>
-		<br>
-
-		</br>
-		<button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;"> 
-		    <p>
-		    	<a href="/" style="text-decoration:none;color:black">
-		    		Go back!
-		    	</a>
-		    </p>
+		<br></br>
+		<button id = "b2"> 
+		    <p><a href="/">Go back!</a></p>
 		</button>
 	</div>
 {% endblock %}

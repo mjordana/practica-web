@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-	AVAILABLE MOVIES
-</h1>
-
-<ul>
-    {% for movie in queryset %}
-        <li><a href="{% url 'filmApplication:movie_detail' movie.id %}">{{ movie.title }}</a></li>
-    {% empty %}
-        <li>Sorry, no movies in this genre registered yet.</li>
-    {% endfor %}
-
-
-</ul>
-
+	<div id = "contingut">
+		<h1>AVAILABLE MOVIES</h1>
+		<ul>
+    		{% for movie in queryset %}
+        		<li>
+		        	<a href="{% url 'filmApplication:movie_detail' movie.id %}">
+		        		{{ movie.title }}
+		        	</a>
+        		</li>
+    			{% empty %}
+       				<li>Sorry, no movies in this genre registered yet.</li>
+   	 		{% endfor %}
+		</ul>
+		<br></br>
+		<button id = "b2"> 
+		    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
+		</button>
+	</div>
 {% endblock %}
 {% block footer %}
-    <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
+
 {% endblock %}

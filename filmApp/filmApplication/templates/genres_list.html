@@ -1,18 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-	MOVIE GENRES AVAILABLE
-</h1>
-<ul>
-	{% for genre in genre_list %}
-		<li><a href="{% url 'filmApplication:genres_detail' genre.id %}">
-			{{ genre.genre }}</a></li>
-	{% endfor %}
-</ul>
+	<div id = "contingut">
+		<h1>MOVIE GENRES AVAILABLE</h1>
+		<ul>
+			{% for genre in genre_list %}
+				<li>
+					<a href="{% url 'filmApplication:genres_detail' genre.id %}">
+						{{ genre.genre }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+		<br></br>
+		<button id = "b2"> 
+		    <p><a href="/">Go back!</a></p>
+		</button>
 {% endblock %}
 
 {% block footer %}
-    <p><a href="/">Go back!</a></p>
+
 {% endblock %}
 
 

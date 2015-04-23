@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 from filmApplication.models import Actor, Director, Movie, Genre
 from filmApplication.forms import ActorForm, DirectorForm, MovieForm, ReviewForm

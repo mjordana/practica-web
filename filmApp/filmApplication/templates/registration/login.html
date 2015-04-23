@@ -5,7 +5,7 @@
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
-    <div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 40px; left: -160px; z-index: 2;text-align: left;">
+    <div id = "contingut">
         <form method="post" action=".">{% csrf_token %}
             <table border="0">
                 <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>
@@ -15,16 +15,15 @@
              <input type="hidden" name="next" value="/" />
         </form>
         <br>
-
         </br>
-        <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;"> 
+        <button id = "b2"> 
             <p>
                 <a href="/register/" style="text-decoration:none;color:black">
                     Register
                 </a>
             </p>
         </button>
-        <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
+        <button id = "b2"> 
 		    <p>
 		    <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
 		    </p>

@@ -1,20 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <div style="position: relative; height:100%; width:100%; margin: 0 auto; background-color:#008000; top: 20px; left: -160px; z-index: 2;text-align: left;">
-        <h1>
-    	   {{ movie.name }}
-        </h1>
-        
+    <div id = "contingut">
+        <h1>{{ movie.name }}</h1>
         {% if user.is_staff %}
     	   <p>
-                <button style="color: #ACFA58;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;"> 
-                    <a href="{% url 'filmApplication:movie_edit' movie.id %}" style="text-decoration:none;color:black">
+                <button id = "b3"> 
+                    <a href="{% url 'filmApplication:movie_edit' movie.id %}">
                         Edit movie
                     </a>
                 </button>
                 &nbsp;&nbsp;
-                <button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">
-        	        <a href="{% url 'filmApplication:delete_movie' movie.id %}" style="text-decoration:none;color:black">
+                <button id = "b4">
+        	        <a href="{% url 'filmApplication:delete_movie' movie.id %}">
                         Delete movie.
                     </a>
                 </button>
@@ -23,26 +20,26 @@
 
         <h2>Information: </h2>
         	<ol>
-        		<p>Title: {{movie.title}}</p>
-        		<p>Year: {{movie.year}}</p>
-        		<p>Duration: {{movie.duration}}</p>
-        		<p>Genre: {{movie.genre}}</p>
-    	        <p>Director:
-                    <a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="text-decoration:none;color:blue">
+        		<li type="disc"><p>Title: {{movie.title}}</p></li>
+        		<li type="disc"><p>Year: {{movie.year}}</p></li>
+        		<li type="disc"><p>Duration: {{movie.duration}}</p></li>
+        		<li type="disc"><p>Genre: {{movie.genre}}</p></li>
+    	        <li type="disc"><p>Director:
+                    <a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="color:blue">
                         {{movie.director}}
                     </a>
                 </p>
-        		<p><p>Actors:</p>
+        		<p><li type="disc"><p>Actors:</p></li>
         				<ul>
         				{% for actor in movie.actors.all %}
-        					<p><span property="actor">
-                                <a href="{% url 'filmApplication:actor_detail' actor.id %}" style="text-decoration:none;color:blue">
-                                    {{actor.name}}
-                                </a>
-                            </span></p>
+        					<p>
+                                <span property="actor">
+                                    <a href="{% url 'filmApplication:actor_detail' actor.id %}" style="color:blue">
+                                        {{actor.name}}
+                                    </a>
+                                </span></p>
         				{% endfor %}
         				</ul>
-
                     </p></li>
         	</ol>
 
@@ -65,14 +62,14 @@
                 <div style="border: 3px solid #FFF;width: 350px;">
                     {% if user == review.user %}
                 	    <p>
-                            <button style="color: #ACFA58;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #ACFA58;">    
-                                <a href="{% url 'filmApplication:review_edit' review.id %}" style="text-decoration:none;color:black">
+                            <button id = "b3">   
+                                <a href="{% url 'filmApplication:review_edit' review.id %}">
                                     Edit review.
                                 </a>
                             </button>
                             &nbsp;&nbsp;
-                            <button style="color: #FFF;font-weight: bold;font-size: 90%;cursor: pointer;background-color: #900;">
-                    	        <a href="{% url 'filmApplication:delete_review' review.id %}" style="text-decoration:none;color:black">
+                            <button id = "b4">
+                    	        <a href="{% url 'filmApplication:delete_review' review.id %}">
                                     Delete review.
                                 </a>
                             </button>
@@ -105,7 +102,7 @@
                 <p>Rating:</p>
                 <p>
             {% for rate in RATING_CHOICES %}
-            <li style="list-style-type:none;float:left;margin-left:40px;margin-right:40px;text-align:center;padding-top:15px;">
+            <li id = "li1">
                 <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
 
                 <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br /></li>
@@ -113,13 +110,9 @@
             </p></br></br></br>
             <input type="submit" value="Add" />
         </form>
-        <br>
-
-        </br>
-        <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;"> 
-            <p>
-                <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
-            </p>
+        <br></br>
+        <button id = "b2"> 
+            <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
         </button>
     </div>
     {% endblock %}
