@@ -10,9 +10,9 @@ a{
 }
 #header
 {
-    margin: 0;
+    margin: 250px;
     padding: 10px;
-    text-align: right;
+    text-align: center;
 }
 
 #content

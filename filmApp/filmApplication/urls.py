@@ -75,7 +75,7 @@ urlpatterns = patterns('',
         name='actor_edit'),
 
     #List all actors
-    url(r'^actors\.(?P<extension>(json|xml))/$',
+    url(r'^actors\.(?P<extension>(json|xml))$',
         ActorList.as_view(),
         name='actors_list_conneg'),
 

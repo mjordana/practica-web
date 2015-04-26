@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.template import RequestContext
 from django.contrib.auth import logout
 
-
+#Per assegurar-nos que estem loggejats al entrar en una URL
 class LoginRequiredMixin(object):
     """Ensures that user must be authenticated in order to access view."""
 
@@ -28,7 +28,7 @@ class LoginRequiredMixin(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
-#Primer exemple de pagina principal
+
 def mainpage(request):
     template = get_template('mainpage.html')
     variables = Context({
@@ -258,10 +258,4 @@ def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-@login_required
-def home(request):
-    return render_to_response(
-    'mainpage.html',
-    { 'user': request.user }
-    )
 

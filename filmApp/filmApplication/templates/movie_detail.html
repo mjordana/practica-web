@@ -98,7 +98,7 @@
         <h3>Add Review</h3>
         <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
             {% csrf_token %}
-                <textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Mesage...</textarea>
+                <textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Write here a message.</textarea>
                 <p>Rating:</p>
                 <p>
             {% for rate in RATING_CHOICES %}
