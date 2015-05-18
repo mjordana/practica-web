@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/filmApp.iml" filepath="$PROJECT_DIR$/.idea/filmApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/practica-web.iml" filepath="$PROJECT_DIR$/.idea/practica-web.iml" />
     </modules>
   </component>
 </project>

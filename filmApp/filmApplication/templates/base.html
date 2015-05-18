@@ -1,19 +1,24 @@
 {% load staticfiles %}
-
+<!DOCTYPE html>
 <html>
+
 <head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
     <link rel="stylesheet" href="{% static "style/base.css" %}" />
     <title>{% block title %}MY FILM APPLICATION PAGE{% endblock %}</title>
 </head>
 
-<body bgcolor ="#46F7B9">
+<body>
 <div id="header">
     {% block header %}
         {% if user.username %}
             <p>
                 User {{ user.username }}
-                <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
-                    <a href="/accounts/logout/?next=/" style="text-decoration:none;color:black">
+                <button>
+                    <a href="/accounts/logout/?next=/">
                         logout
                     </a>
                 </button>
@@ -26,8 +31,8 @@
 <div id="sidebar">
     {% block sidebar %}
         <ul>
-            <button style="color: #900;font-weight: bold;font-size: 90%;cursor: pointer;">
-                <a href="/" style="text-decoration:none;color:black">
+            <button>
+                <a href="/">
                     Home
                 </a>
             </button>

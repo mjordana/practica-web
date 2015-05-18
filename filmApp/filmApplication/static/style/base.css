@@ -1,4 +1,3 @@
-@charset "UTF-8"
 
 body{
     background-color: #46F7B9;
@@ -10,7 +9,7 @@ a{
 }
 #header
 {
-    margin: 250px;
+    margin: 25px;
     padding: 10px;
     text-align: center;
 }

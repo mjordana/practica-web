@@ -28,7 +28,6 @@ class LoginRequiredMixin(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
-
 def mainpage(request):
     template = get_template('mainpage.html')
     variables = Context({

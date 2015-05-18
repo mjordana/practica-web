@@ -1,12 +1,16 @@
 {% extends "base.html"%}
 
 {% block content %}
+
 	<div id = "contingut">
 		<h1>CREATE / MODIFY</h1>
+
 		<form method="post" enctype="multipart/form-data" action="">
 		    {% csrf_token %}
+
 		    <table>
 		        {{ form.as_table }}
+
 		    </table>
 		    <input type="submit" value="SUBMIT"/>
 		</form>
