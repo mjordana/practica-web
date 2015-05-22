@@ -4,11 +4,24 @@ from filmApplication.models import Actor, Director, Movie, Genre
 from filmApplication.forms import ActorForm, DirectorForm, MovieForm, ReviewForm
 from filmApplication.views import *
 from django.contrib import admin
+from rest_framework import routers
 
 
 admin.autodiscover()
 
+router = routers.DefaultRouter()
+router.register(r'user', UserViewSet)
+router.register(r'movies', APIMovieViewSet)
+router.register(r'actors', APIActorViewSet)
+router.register(r'directors', APIDirectorViewSet)
+router.register(r'reviews', APIReviewViewSet)
+router.register(r'genres', APIGenreViewSet,  base_name='genres')
+
+
 urlpatterns = patterns('',
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
 
 #DIRECTORS urls
 
@@ -26,22 +39,12 @@ urlpatterns = patterns('',
         ),
         name= 'director_edit'),
 
-    #List all directors
-    url(r'^directors\.(?P<extension>(json|xml))$',
-        DirectorList.as_view(),
-        name='directors_list_conneg'),
 
     #List all directors
     url(r'^directors/$',
         DirectorList.as_view(),
         name='directors_list'),
 
-    # Director details: ex: /filmApplication/directors/40
-    url(r'^directors/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
-        DirectorDetail.as_view(
-            model = Director,
-        ),
-        name='director_detail_conneg'),
 
     # Director details: ex: /filmApplication/directors/40
     url(r'^directors/(?P<pk>\d+)/$',
@@ -74,20 +77,10 @@ urlpatterns = patterns('',
         ),
         name='actor_edit'),
 
-    #List all actors
-    url(r'^actors\.(?P<extension>(json|xml))$',
-        ActorList.as_view(),
-        name='actors_list_conneg'),
 
     url(r'^actors/$',
         ActorList.as_view(),
         name='actors_list'),
-
-    url(r'^actors/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
-        ActorDetail.as_view(
-            model = Actor,
-        ),
-        name='actor_detail_conneg'),
 
     #Actor details: Ex: /filmApplication/actors/40
     url(r'^actors/(?P<pk>\d+)/$',
@@ -105,22 +98,11 @@ urlpatterns = patterns('',
         name = 'delete_actor'),
 
 
-    url(r'^genres\.(?P<extension>(json|xml))$',
-        GenreList.as_view(),
-        name='genres_list_conneg'),
-
 
     url(r'^genres/$',
         GenreList.as_view(),
         name='genres_list'),
 
-
-    #Detail of a genre: Movies of a concrete genre
-    url(r'^genres/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
-        GenreDetail.as_view(
-            model = Genre,
-        ),
-        name='genres_detail_conneg'),
 
     #Detail of a genre: Movies of a concrete genre
     url(r'^genres/(?P<pk>\d+)/$',
@@ -148,21 +130,9 @@ urlpatterns = patterns('',
 
 
     #List all movies : Ex: /filmApplication/films
-    url(r'^movies\.(?P<extension>(json|xml))$',
-        MovieList.as_view(),
-        name='movie_list_conneg'),
-
-    #List all movies : Ex: /filmApplication/films
     url(r'^movies/$',
         MovieList.as_view(),
         name='movie_list'),
-
-
-    url(r'^movies/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
-        MovieDetail.as_view(
-            model = Movie,
-        ),
-        name='movie_detail_conneg'),
 
     #Detail of a movie: /FilmApplication/films
     url(r'^movies/(?P<pk>\d+)/$',
