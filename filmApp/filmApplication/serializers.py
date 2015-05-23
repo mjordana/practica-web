@@ -22,7 +22,7 @@ class DirectorSerializer(serializers.HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name='filmApplication:director-detail')
     class Meta:
         model = Director
-        fields = ('url','name','birthYear', 'birthPlace','nationality',)
+        fields = ('url','name','birthYear', 'birthPlace', 'nationality',)
 
 
 class MovieSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,11 +36,13 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
         model = Movie
         fields = ('url','title','year', 'duration','genre','director','actors', )
 
+
 class GenreSerializer(serializers.HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name='filmApplication:genres-detail')
     class Meta:
         model = Genre
         fields = ('url','genre',)
+
 
 class MovieReviewSerializer(serializers.HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name='filmApplication:moviereview-detail')

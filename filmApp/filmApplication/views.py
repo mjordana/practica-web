@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView, UpdateView,DeleteView
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.template import Context
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 
 from models import Movie, Actor, Director, MovieReview,Review,Genre
 from forms import MovieForm, DirectorForm, ActorForm, ReviewForm,RegistrationForm
@@ -16,6 +18,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.template import RequestContext
 from django.contrib.auth import logout
+from rest_framework.decorators import api_view
 
 from rest_framework import viewsets
 from rest_framework import generics
@@ -43,6 +46,20 @@ def mainpage(request):
     return HttpResponse(output)
 
 #REST FRAMEWORK PART:
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    """
+    The entry endpoint of our API
+    """
+    return Response({
+        'users': reverse('user-list', vrequest=request),
+        'movies': reverse('movies-list', request=request),
+        'actors': reverse('actors-list', request=request),
+        'directors': reverse('directors-list', request=request),
+        'reviews': reverse('reviews-list', request=request),
+        'genres': reverse('genres-list', request=request),
+    })
 
 class APIMovieList(generics.ListCreateAPIView):
     model = Movie
