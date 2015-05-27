@@ -1,20 +1,83 @@
-{% extends "base.html"%}
-
+{% extends "base.html" %}
+{% load staticfiles %}
+<title>{% block title %}{{titlehead}}{% endblock %}</title>
+    {% block menu %}
+	<div id="semiopaquemenu">
+	<ul class="semiopaquemenu">
+	<li><a href="/filmApplication/"{% if titlehead == "Movie Application" %}class="selected" {% endif %}>Main Page</a></li>
+	<li><a href="/filmApplication/movies/"{% if titlehead == "Movies" %}class="selected" {% endif %}>Films</a></li>
+	<li><a href="/filmApplication/actors/"{% if titlehead == "Actors" %}class="selected" {% endif %}>Actors</a></li>
+	<li><a href="/filmApplication/directors/" {% if titlehead == "Directors" %}class="selected" {% endif %}>Directors</a></li>
+	<li><a href="/filmApplication/genres/"{% if titlehead == "Genres" %}class="selected" {% endif %}>Genres</a></li>
+	</ul><div class="bottombar"></div></div>
+    {% endblock %}
 {% block content %}
+    <script>
+        $(function() {
+            $.getJSON("{% static "nationalities.json" %}", {}, function (nationalities) {
+                $("#id_nationality").autocomplete({
+                    source: nationalities
+                });
+            });
+            $("#id_birthPlace").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
+                        data: {
+                            featureClass: "P",
+                            maxRows: 10,
+                            name_startsWith: request.term,
+                            username: "meri10"
+                        },
+                        success: function( data ) {
+                            response( $.map( data.geonames, function( item ) {
+                                return {
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                    value: item.name,
+                                    stateOrProvince: item.adminName1,
+                                    countryName: item.countryName
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#id_stateOrProvince").val(ui.item.stateOrProvince);
+                        $("#id_country").val(ui.item.countryName);
+                        $("#id_zipCode").val("");
+                    }
+                }
+            });
+        });
+    </script>
 
-	<div id = "contingut">
-		<h1>Modify object</h1>
-		<form method="post" enctype="multipart/form-data" action="">
-		        {% csrf_token %}
-		        <table>
-		            {{ form.as_table }}
-		        </table>
-		        <input type="submit" value="Finish"/>
-		</form>
-        <br></br>
-	    <button id = "b2">
-		    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
-		</button>
-	</div>
-
+    <div id="entry">
+		<div id="entry_title">Create / Modify</div>
+		<div id="entry_subtitle"></div>
+		<div id="entry_content">
+			<form method="post" enctype="multipart/form-data" action="">
+			    {% csrf_token %}
+		    	<table>
+		        	{{ form.as_table }}
+				</table>
+		    	<input type="submit" value="Finish"/>
+			</form>
+		</div>
+		<div id="entry_content">
+			    <div class="table">
+				    <div class="row">
+				        <div class="cell2"></div>
+				        <div class="cell1">
+				        	<button id = "b2">
+							    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
+							</button>
+				        </div>
+				    </div>
+			    </div>
+			</div>
+			<div id="entry_footer"></div>
+		</div>
 {% endblock %}

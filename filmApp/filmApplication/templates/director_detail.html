@@ -1,36 +1,86 @@
 {% extends "base.html" %}
-{% block content %}
-	<div id = "contingut">	
-		<h1>{{ director.name }}</h1>
-		{% if user.is_staff %}
-			<p>
-				<button id = "b3">	
-					<a href="{% url 'filmApplication:director_edit' director.id %}">
-					 	Edit director.
-					</a>
-				</button>
-					&nbsp;&nbsp;
-				<button id = "b4">
-					<a href="{% url 'filmApplication:delete_director' director.id %}">
-						Delete director.
-					</a>
-				</button>
-			</p>
-		{% endif %}
-		<h2>Information: </h2>
-		<ol>
-			<li type="disc"><p>Name: {{director.name}}</p></li>
-			<li type="disc"><p>Birth Year: {{director.birthYear}}</p></li>
-			<li type="disc"><p>Birth Place: {{director.birthPlace}}</p></li>
-			<li type="disc"><p>Nationality: {{director.nationality}}</p></li>
-		</ol>
-		<br></br>
-	    <button id = "b2">
-		    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
-		</button>
-
+{% block title %}{{titlehead}}{% endblock %}
+{% block menu %}
+	<div id="semiopaquemenu">
+		<ul class="semiopaquemenu">
+			<li><a href="/filmApplication/">Main Page</a></li>
+			<li><a href="/filmApplication/movies/">Films</a></li>
+			<li><a href="/filmApplication/actors/">Actors</a></li>
+			<li><a href="/filmApplication/directors/" class="selected">Directors</a></li>
+			<li><a href="/filmApplication/genres/">Genres</a></li>
+		</ul>
+		<div class="bottombar"></div>
 	</div>
 {% endblock %}
-{% block footer %}
-
+{% block content %}
+	<div id="entry">
+    <div id="entry_title">Director:</div>
+    <div id="entry_subtitle">{{ director.name }}</div>
+    {% if user.is_staff %}
+    <div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell2">
+		        </div>
+		        <div class="cell1">
+			        <button id = "b3">
+						<a href="{% url 'filmApplication:director_edit' director.id%}">Edit Director.</a>
+					</button>
+					<button id = "b4">
+						<a href="{% url 'filmApplication:delete_director' director.id%}">Delete Director.</a>
+					</button>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+    <div id="entry_separator"></div>
+    {% endif %}
+    <div id="entry_subtitle">Information:</div>
+    <div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell1">Name: </div>
+		        <div class="cell2">{{director.name}}</div>
+		    </div>
+	    </div>
+	</div>
+	<div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell1">Birth Year: </div>
+		        <div class="cell2">{{director.birthYear}}</div>
+		    </div>
+	    </div>
+	</div>
+	<div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell1">Birth Place: </div>
+		        <div class="cell2">{{director.birthPlace}}</div>
+		    </div>
+	    </div>
+	</div>
+	<div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell1">Nationality: </div>
+		        <div class="cell2">{{director.nationality}}</div>
+		    </div>
+	    </div>
+	</div>
+    <div id="entry_separator"></div>
+    <div id="entry_content">
+	    <div class="table">
+		    <div class="row">
+		        <div class="cell2"></div>
+		        <div class="cell2">
+		        	<button id = "b2"> 
+					    <p><a href="/filmApplication/directors/" title="Go back!">Go back</a></p>
+					</button>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+    <div id="entry_footer"></div>
+	</div>
 {% endblock %}

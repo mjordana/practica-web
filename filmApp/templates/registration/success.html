@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Registration Successful{% endblock %}
-{% block head %}
- Registration Completed Successfully
-{% endblock %}
+{% block title %} Registration Successful {% endblock %}
 {% block content %}
-    Thank you for registering in our filmApplication Web. We hope you enjoy your visit.
-    <a href="/accounts/login/?next=/filmApplication/">Sign in</a>
+	<div id="entry">
+		<div id="entry_title">  Registration Successful </div>
+		<div id="entry_content"> Thank you for registering in our filmApplication Web. We hope you enjoy your visit.</div>
+		<div id="entry_separator"></div>
+		<div id="entry_content"> <a href="/accounts/login/?next=/filmApplication/">Sign in</a> </div>
+		<div id="entry_footer"></div>
+	</div>
 {% endblock %}

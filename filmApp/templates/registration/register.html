@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 {% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
 {% block content %}
-
-    <div id = "contingut">
-	    <form method="post" action=".">{% csrf_token %}
-	        <table border="0">
-	            {{ form.as_table }}
-	        </table>
-	        <input type="submit" value="Register" />
-	    </form>
-	    <br>
-
-		</br>
-		<button id = "b2">  
-		    <p>
-		    	<a href="/accounts/login/?next=/filmApplication/">
-		    		Login
-		    	</a>
-		    </p>
-		</button>
-
-        <button id = "b2"> 
-		    <p><a href="/">Go back!</a></p>
-		</button>
-	</div>
+    <div id="entry">
+		<div id="entry_title">Create / Modify</div>
+		<div id="entry_subtitle"></div>
+		<div id="entry_content">
+			<form method="post" action=".">
+			    {% csrf_token %}
+		    	<table>
+		        	{{ form.as_table }}
+				</table>
+		    	<input type="submit" value="Register"/>
+			</form>
+		</div>
+		<div id="entry_content">
+			    <div class="table">
+				    <div class="row">
+				        <div class="cell2"></div>
+				        <div class="cell1">
+				        	<button id = "b2">
+							    <p><a href="/" title="Go back!">Go back</a></p>
+							</button>
+				        </div>
+				    </div>
+			    </div>
+			</div>
+			<div id="entry_footer"></div>
+		</div>
 {% endblock %}

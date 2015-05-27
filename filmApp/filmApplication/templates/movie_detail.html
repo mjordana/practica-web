@@ -1,122 +1,196 @@
 {% extends "base.html" %}
+{% block title %}{{titlehead}}{% endblock %}
+{% block menu %}
+    <div id="semiopaquemenu">
+    <ul class="semiopaquemenu">
+    <li><a href="/filmApplication/">Main Page</a></li>
+    <li><a href="/filmApplication/movies/" class="selected">Films</a></li>
+    <li><a href="/filmApplication/actors/">Actors</a></li>
+    <li><a href="/filmApplication/directors/">Directors</a></li>
+    <li><a href="/filmApplication/genres/">Genres</a></li>
+    </ul><div class="bottombar"></div></div>
+{% endblock %}
 {% block content %}
-    <div id = "contingut">
-        <h1>{{ movie.name }}</h1>
-        {% if user.is_staff %}
-    	   <p>
-                <button id = "b3"> 
-                    <a href="{% url 'filmApplication:movie_edit' movie.id %}">
-                        Edit movie
-                    </a>
-                </button>
-                &nbsp;&nbsp;
-                <button id = "b4">
-        	        <a href="{% url 'filmApplication:delete_movie' movie.id %}">
-                        Delete movie.
-                    </a>
-                </button>
-            </p>
-        {% endif %}
-
-        <h2>Information: </h2>
-        	<ol>
-        		<li type="disc"><p>Title: {{movie.title}}</p></li>
-        		<li type="disc"><p>Year: {{movie.year}}</p></li>
-        		<li type="disc"><p>Duration: {{movie.duration}}</p></li>
-        		<li type="disc"><p>Genre: {{movie.genre}}</p></li>
-    	        <li type="disc"><p>Director:
-                    <a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="color:blue">
-                        {{movie.director}}
-                    </a>
-                </p>
-        		<p><li type="disc"><p>Actors:</p></li>
-        				<ul>
-        				{% for actor in movie.actors.all %}
-        					<p>
-                                <span property="actor">
-                                    <a href="{% url 'filmApplication:actor_detail' actor.id %}" style="color:blue">
-                                        {{actor.name}}
-                                    </a>
-                                </span></p>
-        				{% endfor %}
-        				</ul>
-                    </p></li>
-        	</ol>
-
-
-        <h2>Reviews</h2>
-        
-        {% if movie.moviereview_set.all|length > 0 %}
-        <span rel="aggregateRating">
-            <p typeof="AggregateRating">
-                Average rating <span property="ratingValue">{{ movie.averageRating|stringformat:".1f" }}</span>
-                {% with movie.moviereview_set.all|length as reviewCount %}
-                from <span property="reviewCount">{{ reviewCount }}</span> review{{ reviewCount|pluralize }}
-                {% endwith %}
-            </p>
-        </span>
-
-
-        <ul rel="review">
-            {% for review in movie.moviereview_set.all %}
-                <div style="border: 3px solid #FFF;width: 350px;">
+    <div id="entry">
+    <div id="entry_title">Movie:</div>
+    <div id="entry_subtitle">{{ movie.name }}</div>
+    {% if user.is_staff %}
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell2">
+                </div>
+                <div class="cell1">
+                    <button id = "b3">
+                        <a href="{% url 'filmApplication:movie_edit' movie.id %}">Edit movie.</a>
+                    </button>
+                    <button id = "b4">
+                        <a href="{% url 'filmApplication:delete_movie' movie.id%}">Delete movie.</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_separator"></div>
+    {% endif %}
+    <div id="entry_subtitle">Information:</div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Title: </div>
+                <div class="cell2">{{movie.title}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Year: </div>
+                <div class="cell2">{{movie.year}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Duration: </div>
+                <div class="cell2">{{movie.duration}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Genre: </div>
+                <div class="cell2">{{movie.genre}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Director: </div>
+                <div class="cell2"><a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="color:blue">{{movie.director}}</a></div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Actors:</div>
+                <div class="cell2">
+                {% for actor in movie.actors.all %}
+                    <div id="entry_content_transparent"><a href="{% url 'filmApplication:actor_detail' actor.id %}" style="color:blue">{{actor.name}}</a></div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_footer"></div>
+    </div>
+    {% if movie.moviereview_set.all|length > 0 %}
+    <div id="entry">
+    <div id="entry_title"> Reviews: </div>
+    <div id="entry_content">
+        <div class="table">
+            <div class="row">
+                <div class="cell1">Rating value: </div>
+                <div class="cell1">
+                    <script>
+                        var i = 0
+                        var j = 0
+                        {% for review in movie.moviereview_set.all %}
+                            var i = i + {{ review.rating }}
+                            var j = j + 1
+                        {% endfor %}
+                         document.write(i/j);
+                         document.write('\u002F');
+                         document.write(5);
+                    </script> </div>
+                <div class="cell1">aqui las estrellas </div>
+            </div>
+        </div>
+    </div>
+    <div id="entry_separator"></div>
+    <div id="entry_subtitle">Ratings:</div>
+     <div id="entry_content">
+             {% for review in movie.moviereview_set.all %}
+             <div class="table">
+            <div class="row">
+                <div class="smallcell">{{ review.rating }}</div>
+                <div class="smallcell">{{ review.date}}</div>
+                <div class="smallcell">{{ review.user}}</div>
+                <div class="normalcell">
                     {% if user == review.user %}
-                	    <p>
-                            <button id = "b3">   
+                    <button id = "b3">   
                                 <a href="{% url 'filmApplication:review_edit' review.id %}">
                                     Edit review.
                                 </a>
                             </button>
-                            &nbsp;&nbsp;
                             <button id = "b4">
-                    	        <a href="{% url 'filmApplication:delete_review' review.id %}">
+                                <a href="{% url 'filmApplication:delete_review' review.id %}">
                                     Delete review.
                                 </a>
                             </button>
-                        </p>
                     {% endif %}
-                
-                        <p rel="reviewRating" typeof="Rating">
-                            <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
-                            <span property="ratingValue">{{ review.rating }}</span> star{{ review.rating|pluralize }}
-                            {% with RATING_CHOICES|last as best %}
-                            <span property="bestRating" content="{{ best.0 }}"></span>
-                            {% endwith %}
-                        </p>
-                        <p property="description">{{ review.comment }}</p>
-                        <p>Created by <span property="author">{{ review.user }}</span> on
-                        <span property="publishDate">{{ review.date}}</span></p>
-
                 </div>
-                &nbsp;
+            </div>
+            </div>
+            <div id="entry_content_transparent">{{review.comment}}</div>
+            <div id="entry_separator"></div>
             {% endfor %}
-        </ul>
+        </div>
+        <div id="entry_footer"></div>
+    </div>
+    {% endif %}
 
-        </span>
-        {% endif %}
-        
-        <h3>Add Review</h3>
-        <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
-            {% csrf_token %}
-                <textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Write here a message.</textarea>
-                <p>Rating:</p>
-                <p>
-            {% for rate in RATING_CHOICES %}
-            <li id = "li1">
-                <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
-
-                <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br /></li>
-            {% endfor %}
-            </p></br></br></br>
-            <input type="submit" value="Add" />
-        </form>
-        <br></br>
+    <div id="entry">
+    <div id="entry_title">New review</div>
+    <div id="entry_content">
+    <form action="{% url 'filmApplication:review_create' movie.id %}" method="post">
+    {% csrf_token %}
+        <div class="table">
+            <div class="row">
+                <div class="cell1" style="vertical-align:middle">Message</div>
+                <div class="cell2"><textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Write here a message.</textarea></div>
+            </div>
+            <div class="row">
+                <div class="cell1" style="vertical-align:middle">Rating</div>
+                <div class="cell2">
+                {% for rate in RATING_CHOICES %}
+                    <li id = "li1">
+                    <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
+                    <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br /></li>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="smallcell"></div>
+                    <div class="smallcell"></div>
+                    <div class="smallcell"><input type="submit" value="Add" /></div>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div id="entry_footer"></div>
+    </div>
+    <div id="entry">
+    <div id="entry_title"> Go back </div>
+    <div id="entry_content">
+            <div class="table">
+                <div class="row">
+                    <div class="cell2"></div>
+                    <div class="cell1">
         <button id = "b2"> 
             <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
         </button>
-    </div>
-    {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="entry_footer"></div>
+        </div>
 
-{% block footer %}
+
 
 {% endblock %}

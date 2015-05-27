@@ -6,49 +6,35 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
     <link rel="stylesheet" href="{% static "style/base.css" %}" />
-    <title>{% block title %}MY FILM APPLICATION PAGE{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static "style/clac.png" %}" />
+    <title>{% block title %}{{titlehead}}{% endblock %}</title>
+
 </head>
-
 <body>
-<div id="header">
-    {% block header %}
+    <div id="header">
+        <div id="logo"><img src="{% static "style/logo.png" %}" /></div>
+        <div id="status">
         {% if user.username %}
-            <p>
-                User {{ user.username }}
-                <button>
-                    <a href="/accounts/logout/?next=/">
-                        logout
-                    </a>
-                </button>
-            </p>
+            <div id="user_id"><span id="user_id_span">User: {{ user.username }}</span></div>
+            <a href="/accounts/logout/?next=/">
+            <button class="myButton">Logout</button></a>
+        {% else %}
+        <a href="/accounts/login/?next=/filmApplication/">
+            <button class="myButton">Sign in</button></a>
+        <a href="/register/">
+            <button class="myButton">Register now</button></a>
         {% endif %}
+        </div>
+    </div>
+    {% block menu %}
     {% endblock %}
-</div>
-
-
-<div id="sidebar">
-    {% block sidebar %}
-        <ul>
-            <button>
-                <a href="/">
-                    Home
-                </a>
-            </button>
-        </ul>
-    {% endblock %}
-</div>
-
-<div id="content">
-    {% block content %}
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    {% endblock %}
-</div>
-
-<div id="footer">
-    {% block footer %}{% endblock %}
-</div>
-
+    <div id="container">
+        <div id="content">
+            {% block content %}
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            {% endblock %}
+        </div>
+    </div>
 </body>
 </html>

@@ -1,24 +1,41 @@
 {% extends "base.html" %}
-{% block content %}
-	<div id = "contingut">
-		<h1>AVAILABLE MOVIES</h1>
-		<ul>
-    		{% for movie in queryset %}
-        		<li>
-		        	<a href="{% url 'filmApplication:movie_detail' movie.id %}">
-		        		{{ movie.title }}
-		        	</a>
-        		</li>
-    			{% empty %}
-       				<li>Sorry, no movies in this genre registered yet.</li>
-   	 		{% endfor %}
-		</ul>
-		<br></br>
-		<button id = "b2"> 
-		    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
-		</button>
-	</div>
-{% endblock %}
-{% block footer %}
+{% block title %}{{titlehead}}{% endblock %}
+    {% block menu %}
+	<div id="semiopaquemenu">
+	<ul class="semiopaquemenu">
+	<li><a href="/filmApplication/">Main Page</a></li>
+	<li><a href="/filmApplication/movies/">Films</a></li>
+	<li><a href="/filmApplication/actors/">Actors</a></li>
+	<li><a href="/filmApplication/directors/">Directors</a></li>
+	<li><a href="/filmApplication/genres/" class="selected">Genres</a></li>
+	</ul><div class="bottombar"></div></div>
+    {% endblock %}
 
+{% block content %}
+	<div id="entry">
+	    <div id="entry_title">Avaliable movies:</div>
+	    <div id="entry_separator"></div>
+	    {% for movie in queryset %}
+        	<div id="entry_content">
+		        	<a href="{% url 'filmApplication:movie_detail' movie.id %}">{{ movie.title }}</a>
+        	</div>
+        	<div id="entry_separator"></div>
+			{% empty %}
+   				<div id="entry_content">Sorry, no movies in this genre registered yet.</div>
+   				<div id="entry_separator"></div>
+   	 		{% endfor %}
+   	 		<div id="entry_content">
+			    <div class="table">
+				    <div class="row">
+				        <div class="cell2"></div>
+				        <div class="cell2">
+				        	<button id = "b2"> 
+							    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
+							</button>
+				        </div>
+				    </div>
+			    </div>
+			</div>
+		    <div id="entry_footer"></div>
+			</div>
 {% endblock %}

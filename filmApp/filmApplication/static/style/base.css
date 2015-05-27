@@ -1,89 +1,226 @@
+html{
+    margin:0px;
+    height:100%;
+}
 
 body{
-    background-color: #46F7B9;
+    height: 70%;
+    display: block;
+    background: rgb(114,114,114); /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(114,114,114,1) 0%, rgba(229,229,229,1) 15%, rgba(229,229,229,1) 85%, rgba(114,114,114,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(114,114,114,1)), color-stop(15%,rgba(229,229,229,1)), color-stop(85%,rgba(229,229,229,1)), color-stop(100%,rgba(114,114,114,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(114,114,114,1) 0%,rgba(229,229,229,1) 15%,rgba(229,229,229,1) 85%,rgba(114,114,114,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(114,114,114,1) 0%,rgba(229,229,229,1) 15%,rgba(229,229,229,1) 85%,rgba(114,114,114,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(114,114,114,1) 0%,rgba(229,229,229,1) 15%,rgba(229,229,229,1) 85%,rgba(114,114,114,1) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(114,114,114,1) 0%,rgba(229,229,229,1) 15%,rgba(229,229,229,1) 85%,rgba(114,114,114,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727272', endColorstr='#727272',GradientType=1 ); /* IE6-9 */
 }
 
-a{
-    text-decoration:none;
-    color:black
+#container{
+    width: 80%;
+    height: 80%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-top: 10px;
+    min-height: 100%;
+    max-height: 80%;
+    min-width: 80%;
+    max-width: 80%;
 }
-#header
-{
-    margin: 25px;
-    padding: 10px;
+#content{
+    overflow-y: scroll;
+    display: block;
+    width: 100%;
+    min-height: 80%;
+    max-height: 80%;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    min-width: 100%;
+    max-width: 100%;
+}
+
+#entry{
+    padding-left: 10%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+
+}
+
+#entry_title{
     text-align: center;
-}
-
-#content
-{
-    margin-left: 190px;
-    padding: 10px;
-}
-
-#sidebar
-{
-    float: left;
-    width: 190px;
-}
-
-#footer
-{
-    margin: 0;
-    padding: 10px;
-    text-align: center;
-}
-#menu
-{
-    margin-left: 190px;
-    padding: 10px;
-}
-#contingut{
-    position: relative; 
-    height:100%; 
-    width:100%; 
-    margin: 0 auto;
-    top: 30px; 
-    left: -160px; 
-    z-index: 2;
-    text-align: left;
-    background-color: #46F7B9;
-}
-#b1{
-    color: #FFF;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 25px;
+    padding-left: 4%;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.70);
+    font-size: 20pt;
     font-weight: bold;
-    font-size: 90%;
-    cursor: pointer;
-    background-color: #ACFA58;
-}
-#b2{
-    color: #900;
-    font-weight: bold;
-    font-size: 90%;
-    cursor: pointer;
+    padding-bottom: 1%;
 }
 
-#b3{
-    color: #ACFA58;
+#entry_separator{
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.40);
     font-weight: bold;
-    font-size: 90%;
-    cursor: pointer;
-    background-color: #ACFA58;
+    min-height: 3px;
+    padding-left: 4%;
 }
 
-#b4{
-    color: #FFF;
+#entry_subtitle{
+    padding-left: 4%;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.40);
+    font-size: 18pt;
     font-weight: bold;
-    font-size: 90%;
-    cursor: pointer;
-    background-color: #900;
+    min-height: 10px;
+    padding-bottom: 1%;
 }
- 
-#li1{
-    list-style-type:none;
+
+#entry_content{
+    padding-left: 4%;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.20);
+    font-size: 14pt;
+    font-weight: bold;
+    min-height: 10px;
+}
+
+#entry_content_transparent{
+    padding-left: 4%;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 14pt;
+    font-weight: bold;
+    min-height: 10px;
+}
+
+
+#entry_footer{
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 25px;
+    padding-left: 4%;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.70);
+    font-size: 20pt;
+    font-weight: bold;
+    min-height: 10px;
+}
+
+#header{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    height: 200px;
+    border-top-right-radius: 100px;
+    border-top-left-radius: 100px;
+}
+
+#logo
+{
+    display: inline;
     float:left;
-    margin-left:40px;
-    margin-right:40px;
-    text-align:center;
-    padding-top:15px;
+    height:200px;
+    width: auto;
+    border-radius:800px;
+    background-color: rgba(255, 255, 255, 1);
+}
+#status
+{
+    float: right;
+    display: inline;
+    height: 200px;
+    width: 25%;
+    border-radius: 800px;
+    background-color: rgba(255,255,255,1);
+    text-align: center;
+    vertical-align: middle; 
+}
+#user_id{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 60%;
+    display: table;
+    height: 90px;
+    margin-left: 20%;
+    background-color: rgba(0,0,0,0);
+}
+#user_id_span{
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 20pt;
+  font-weight: bold;
+  font-color: rgba(75, 75, 75, 1);
 }
 
+.myButton {
+    font-size: 20pt;
+    font-weight: bold;
+    font-color: rgba(255, 255, 255, 1);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 60%;
+    text-align: center;
+    vertical-align: middle;
+    display: block;
+    height: 90px;
+    margin-left: 20%;
+    border-radius: 300px;
+    background: #686868; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #686868 0%, #686868 48%, #000000 66%, #ffffff 91%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#686868), color-stop(48%,#686868), color-stop(66%,#000000), color-stop(91%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #686868 0%,#686868 48%,#000000 66%,#ffffff 91%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #686868 0%,#686868 48%,#000000 66%,#ffffff 91%,#ffffff 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #686868 0%,#686868 48%,#000000 66%,#ffffff 91%,#ffffff 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #686868 0%,#686868 48%,#000000 66%,#ffffff 91%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.myButton:hover {
+
+    font-color: rgba(255, 255, 255, 1);
+    border-radius: 300px;
+    background: #686868; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #686868 1%, #686868 48%, #000000 66%, #000000 91%, #000000 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#686868), color-stop(48%,#686868), color-stop(66%,#000000), color-stop(91%,#000000), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #686868 1%,#686868 48%,#000000 66%,#000000 91%,#000000 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #686868 1%,#686868 48%,#000000 66%,#000000 91%,#000000 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #686868 1%,#686868 48%,#000000 66%,#000000 91%,#000000 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #686868 1%,#686868 48%,#000000 66%,#000000 91%,#000000 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.myButton:active {
+    
+    font-color: rgba(255, 255, 255, 1);
+    border-radius: 300px;
+}
+
+
+div.bottombar{height: 10px;background: #333;}
+ul.semiopaquemenu{font:bold 14px Georgia;width:100%;background:#000000;padding:11px 0 8px 0;margin:0;text-align:left;}
+ul.semiopaquemenu li{display: inline;}
+ul.semiopaquemenu li a{color:#888;padding: 6px 8px 6px 8px;margin-right:15px;text-decoration: none;}
+ul.semiopaquemenu li a:hover, ul.semiopaquemenu li a.selected{color:#000;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjgyIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4xNiIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); /* IE9+ SVG equivalent  of linear gradients */
+background: -moz-linear-gradient(top,  rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.16) 100%); /* fade from white (0.82 opacty) to 0.16 opacity */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.82)), color-stop(100%,rgba(255,255,255,0.16)));
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: -o-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: -ms-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+background: linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', endColorstr='#29ffffff',GradientType=0 );
+-moz-box-shadow: 0 0 5px #595959; /* CSS3 box shadows */
+-webkit-box-shadow: 0 0 5px #595959;
+box-shadow: 0 0 5px #595959;
+padding-top: 12px; /* large padding to get menu item to protrude upwards */
+padding-bottom: 20px; /* large padding to get menu item to protrude downwards */
+}
+
+table { width: 100%; height:100%;}
+tr {width: 100%;}
+td { width: 50%; text-align: left;}
+.table { display: table; width: 100%; height:100%;}
+.row { display: table-row; width: 100%;}
+.cell1 { display: table-cell; width: 30%; }
+.cell2 { display: table-cell; width: 70%;}
+.cell3 { display: table-cell; width: 50%; text-align: center;}
+.smallcell { display: table-cell; width: 20%; text-align: center;}
+.normalcell { display: table-cell; width: 40%;}
+.bigcell { display: table-cell; width: 100%; text-align: left;}

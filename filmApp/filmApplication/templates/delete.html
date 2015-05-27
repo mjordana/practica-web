@@ -1,20 +1,45 @@
-{% extends "base.html"%}
-
+{% extends "base.html" %}
+{% block title %}{{titlehead}}{% endblock %}
+{% block menu %}
+	<div id="semiopaquemenu">
+	<ul class="semiopaquemenu">
+	<li><a href="/filmApplication/"{% if titlehead.shift|stringformat:"s" == "Movie Application" %}class="selected" {% endif %}>Main Page</a></li>
+	<li><a href="/filmApplication/movies/"{% if titlehead.shift|stringformat:"s" == "Movies" %}class="selected" {% endif %}>Films</a></li>
+	<li><a href="/filmApplication/actors/"{% if titlehead.shift|stringformat:"s" == "Actors" %}class="selected" {% endif %}>Actors</a></li>
+	<li><a href="/filmApplication/directors/" {% if titlehead.shift|stringformat:"s" == "Directors" %}class="selected" {% endif %}>Directors</a></li>
+	<li><a href="/filmApplication/genres/"{% if titlehead.shift|stringformat:"s" == "Genres" %}class="selected" {% endif %}>Genres</a></li>
+	</ul><div class="bottombar"></div></div>
+{% endblock %}
 {% block content %}
-	<div id = "contingut">
 		<form method="post" action="">
 		        {% csrf_token %}
-		        <table>
-		            {{ form.as_table }}
-		        </table>
-			<h2> Do you really want to delete it?</h2>
-		        <input type="submit" value="Yes"/>
-		        <input type="button" onclick="history.back()" value="No"/>
-		</form>
-        <br> </br>
-	    <button id = "b2">
-		    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
-		</button>
-	</div>
-
+		    <div id="entry">
+		    <div id="entry_title">Do you really want to delete it?</div>
+		    <div id="entry_content">
+		    <div class="table">
+			    <div class="row">
+			        <div class="cell3">
+			        	<input type="submit" value="Yes"/>
+			        </div>
+			        <div class="cell1">
+			        	<button id = "b2"> 
+						    <input type="button" onclick="history.back()" value="No"/>
+						</button>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<div id="entry_content">
+		    <div class="table">
+			    <div class="row">
+			        <div class="cell2"></div>
+			        <div class="cell1">
+			        	<button id = "b2">
+						    <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
+						</button>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<div id="entry_footer"></div>
 {% endblock %}

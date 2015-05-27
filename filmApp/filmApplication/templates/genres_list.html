@@ -1,24 +1,41 @@
 {% extends "base.html" %}
+{% block title %}{{titlehead}}{% endblock %}
+    {% block menu %}
+	<div id="semiopaquemenu">
+	<ul class="semiopaquemenu">
+	<li><a href="/filmApplication/">Main Page</a></li>
+	<li><a href="/filmApplication/movies/">Films</a></li>
+	<li><a href="/filmApplication/actors/">Actors</a></li>
+	<li><a href="/filmApplication/directors/">Directors</a></li>
+	<li><a href="/filmApplication/genres/" class="selected">Genres</a></li>
+	</ul><div class="bottombar"></div></div>
+    {% endblock %}
+
 {% block content %}
-	<div id = "contingut">
-		<h1>MOVIE GENRES AVAILABLE</h1>
-		<ul>
-			{% for genre in genre_list %}
-				<li>
-					<a href="{% url 'filmApplication:genres_detail' genre.id %}">
-						{{ genre.genre }}
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-		<br></br>
-		<button id = "b2"> 
-		    <p><a href="/">Go back!</a></p>
-		</button>
-{% endblock %}
-
-{% block footer %}
-
+	<div id="entry">
+	<div id="entry_title">Movie genres available:</div>
+	{% for genre in genre_list %}
+	    <div id="entry_subtitle"><a href="{% url 'filmApplication:genres_detail' genre.id %}">{{ genre.genre }}</a></div>
+	    <div id="entry_separator"></div>
+	{% empty %}
+		<div id="entry_subtitle">Sorry!</div>
+		<div id="entry_content">No director registered yet! You can add one.</div>
+		<div id="entry_separator"></div>
+	{% endfor %}
+		<div id="entry_content">
+		    <div class="table">
+			    <div class="row">
+			        <div class="cell2"></div>
+			        <div class="cell1">
+			        	<button id = "b2"> 
+						    <p><a href="/" title="Go back!">Go back</a></p>
+						</button>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+		<div id="entry_footer"></div>
+		</div>
 {% endblock %}
 
 

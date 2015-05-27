@@ -1,32 +1,54 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
-{% block head %}Login{% endblock %}
 {% block content %}
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
-    <div id = "contingut">
-        <form method="post" action=".">{% csrf_token %}
-            <table border="0">
-                <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>
-                <tr><th><label for="id_password">Password:</label></th><td>{{ form.password }}</td></tr>
-            </table>
-            <input type="submit" value="Login" />
-             <input type="hidden" name="next" value="/" />
-        </form>
-        <br>
-        </br>
-        <button id = "b2"> 
+    <div id="entry">
+        <div id="entry_title">Create / Modify</div>
+        <div id="entry_subtitle"></div>
+        <div id="entry_content">
+            <form method="post" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+        </div>
+        <div id="entry_content">
+                <div class="table">
+                    <div class="row">
+                        <div class="normalcell" style="text-align: center">Username:</div>
+                        <div class="normalcell">{{ form.username }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="normalcell"style="text-align: center">Password:</div>
+                        <div class="normalcell">{{ form.password }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="normalcell"></div>
+                        <div class="normalcell"><input type="submit" value="Login" />
+                        <input type="hidden" name="next" value="/" /></div>
+                    </div>
+                </div>
+        </div>
+            <div id="entry_separator"></div>
+            <div id="entry_content">
+                <div class="table">
+                    <div class="row">
+                        <div class="normalcell"><button id = "b2"> 
             <p>
                 <a href="/register/">
                     Register
                 </a>
             </p>
-        </button>
+        </button></div>
+                        <div class="normalcell">
         <button id = "b2"> 
-		    <p>
-		    <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
-		    </p>
-		</button>
-    </div>
+            <p>
+            <a href="javascript:history.back(-1);" title="Go back!">Go back</a>
+            </p>
+        </button></div>
+                    </div>
+                </div>
+            </div>
+            <div id="entry_footer"></div>
+            </form>
+        </div>
 {% endblock %}
