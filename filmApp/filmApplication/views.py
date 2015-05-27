@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.template import Context
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from django.views.generic.base import TemplateResponseMixin
+from django.core import serializers
 
 from models import Movie, Actor, Director, MovieReview,Review,Genre
 from forms import MovieForm, DirectorForm, ActorForm, ReviewForm,RegistrationForm
@@ -32,6 +34,28 @@ class LoginRequiredMixin(object):
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
+class ConnegResponseMixin(TemplateResponseMixin):
+
+    def render_json_object_response(self, objects, **kwargs):
+        json_data = serializers.serialize(u"json", objects, **kwargs)
+        return HttpResponse(json_data, content_type=u"application/json")
+
+    def render_xml_object_response(self, objects, **kwargs):
+        xml_data = serializers.serialize(u"xml", objects, **kwargs)
+        return HttpResponse(xml_data, content_type=u"application/xml")
+
+    def render_to_response(self, context, **kwargs):
+        if 'extension' in self.kwargs:
+            try:
+                objects = [self.object]
+            except AttributeError:
+                objects = self.object_list
+            if self.kwargs['extension'] == 'json':
+                return self.render_json_object_response(objects=objects)
+            elif self.kwargs['extension'] == 'xml':
+                return self.render_xml_object_response(objects=objects)
+        else:
+            return super(ConnegResponseMixin, self).render_to_response(context)
 
 def mainpage(request):
     template = get_template('mainpage.html')
@@ -125,7 +149,7 @@ class APIGenreViewSet(viewsets.ModelViewSet):
 #------------------------------------------------------------------
 
 # MOVIE:
-class MovieDetail(LoginRequiredMixin,DetailView):
+class MovieDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
     model = Movie
     template_name = 'movie_detail.html'
 
@@ -150,7 +174,7 @@ class MovieUpdate(LoginRequiredMixin,UpdateView):
     template_name = 'update.html'
 
 
-class MovieList(LoginRequiredMixin,ListView):
+class MovieList(LoginRequiredMixin,ListView,ConnegResponseMixin):
     model = Movie
     template_name = 'movie_list.html'
     queryset = Movie.objects.all()
@@ -161,7 +185,7 @@ class MovieDelete(LoginRequiredMixin,DeleteView):
     success_url = '/filmApplication/movies/'
 
 #ACTORS
-class ActorDetail(LoginRequiredMixin,DetailView):
+class ActorDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
     model = Actor
     template_name = 'actor_detail.html'
 
@@ -181,7 +205,7 @@ class ActorUpdate(LoginRequiredMixin,UpdateView):
     template_name = 'update.html'
 
 
-class ActorList(LoginRequiredMixin,ListView):
+class ActorList(LoginRequiredMixin,ListView,ConnegResponseMixin):
     model = Actor
     template_name = 'actors_list.html'
     queryset = Actor.objects.all()
@@ -194,7 +218,7 @@ class ActorDelete(LoginRequiredMixin,DeleteView):
 
 
 #DIRECTORS
-class DirectorDetail(LoginRequiredMixin,DetailView):
+class DirectorDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
     model = Director
     template_name = 'director_detail.html'
 
@@ -214,7 +238,7 @@ class DirectorUpdate(LoginRequiredMixin,UpdateView):
     template_name = 'update.html'
 
 
-class DirectorList(LoginRequiredMixin,ListView):
+class DirectorList(LoginRequiredMixin,ListView,ConnegResponseMixin):
     model = Director
     template_name = 'directors_list.html'
     queryset = Director.objects.all()
@@ -259,14 +283,14 @@ def review(request, pk):
 
 
 #GENRES : Only admin create and delete genres not users
-class GenreList(LoginRequiredMixin, ListView):
+class GenreList(LoginRequiredMixin, ListView, ConnegResponseMixin):
     model = Genre
     template_name = 'genres_list.html'
     queryset = Genre.objects.all()
 
 
 
-class GenreDetail(LoginRequiredMixin, DetailView):
+class GenreDetail(LoginRequiredMixin, DetailView, ConnegResponseMixin):
     model = Genre
 
     def get(self, request, *args, **kwargs):

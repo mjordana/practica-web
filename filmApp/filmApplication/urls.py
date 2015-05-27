@@ -22,6 +22,45 @@ urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    url(r'^directors\.(?P<extension>(json|xml))$',
+        DirectorList.as_view(),
+        name='directors_list_conneg'),
+
+    url(r'^directors/(?P<pk>\d+)\.(?P<extension>(json|xml))/$',
+        DirectorDetail.as_view(
+            model = Director,
+        ),
+        name='director_detail_conneg'),
+
+    url(r'^actors\.(?P<extension>(json|xml))/$',
+        ActorList.as_view(),
+        name='actors_list_conneg'),
+
+    url(r'^actors/(?P<pk>\d+)\.(?P<extension>(json|xml))/$',
+        ActorDetail.as_view(
+            model = Actor,
+        ),
+        name='actor_detail_conneg'),
+
+    url(r'^genres\.(?P<extension>(json|xml))/$',
+        GenreList.as_view(),
+        name='genres_list_conneg'),
+
+    url(r'^genre/(?P<pk>\d+)\.(?P<extension>(json|xml))/$',
+        GenreDetail.as_view(
+            model = Genre,
+        ),
+        name='genres_detail_conneg'),
+
+    url(r'^movies\.(?P<extension>(json|xml))/$',
+        MovieList.as_view(),
+        name='movie_list_conneg'),
+
+    url(r'^movies/(?P<pk>\d+)\.(?P<extension>(json|xml))/$',
+        MovieDetail.as_view(
+            model = Movie,
+        ),
+        name='movie_detail_conneg'),
 
 #DIRECTORS urls
 
@@ -175,3 +214,4 @@ urlpatterns = patterns('',
         ),
         name = 'delete_review'),
 )
+
