@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{titlehead}}{% endblock %}
+<spanvocab="http://schema.org/" typeof="Movie">
+
 {% block menu %}
     <div id="semiopaquemenu">
     <ul class="semiopaquemenu">
@@ -21,12 +23,8 @@
                 <div class="cell2">
                 </div>
                 <div class="cell1">
-                    <button id = "b3">
-                        <a href="{% url 'filmApplication:movie_edit' movie.id %}">Edit movie.</a>
-                    </button>
-                    <button id = "b4">
-                        <a href="{% url 'filmApplication:delete_movie' movie.id%}">Delete movie.</a>
-                    </button>
+                        <a class="miniboton negro" href="{% url 'filmApplication:movie_edit' movie.id %}">Edit movie.</a>
+                        <a class="miniboton negro" href="{% url 'filmApplication:delete_movie' movie.id%}">Delete movie.</a>
                 </div>
             </div>
         </div>
@@ -103,11 +101,11 @@
                             var i = i + {{ review.rating }}
                             var j = j + 1
                         {% endfor %}
-                         document.write(i/j);
+                         document.write(parseFloat(i/j).toFixed(2));
                          document.write('\u002F');
                          document.write(5);
                     </script> </div>
-                <div class="cell1">aqui las estrellas </div>
+                <div class="cell1"></div>
             </div>
         </div>
     </div>
@@ -122,16 +120,12 @@
                 <div class="smallcell">{{ review.user}}</div>
                 <div class="normalcell">
                     {% if user == review.user %}
-                    <button id = "b3">   
-                                <a href="{% url 'filmApplication:review_edit' review.id %}">
+                                <a class="miniboton negro" href="{% url 'filmApplication:review_edit' review.id %}">
                                     Edit review.
                                 </a>
-                            </button>
-                            <button id = "b4">
-                                <a href="{% url 'filmApplication:delete_review' review.id %}">
+                                <a class="miniboton negro" href="{% url 'filmApplication:delete_review' review.id %}">
                                     Delete review.
                                 </a>
-                            </button>
                     {% endif %}
                 </div>
             </div>
@@ -167,7 +161,7 @@
             <div class="row">
                 <div class="smallcell"></div>
                     <div class="smallcell"></div>
-                    <div class="smallcell"><input type="submit" value="Add" /></div>
+                    <div class="smallcell"><input type="submit" value="Add" class="boton negro"/></div>
             </div>
         </div>
     </form>
@@ -181,9 +175,7 @@
                 <div class="row">
                     <div class="cell2"></div>
                     <div class="cell1">
-        <button id = "b2"> 
-            <p><a href="javascript:history.back(-1);" title="Go back!">Go back</a></p>
-        </button>
+                        <a <a class="boton negro" href="javascript:history.back(-1);" title="Go back!" class="boton azul">Go back</a>
                     </div>
                 </div>
             </div>

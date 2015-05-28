@@ -23,12 +23,8 @@
 		        <div class="cell2">
 		        </div>
 		        <div class="cell1">
-			        <button id = "b3">
-						<a href="{% url 'filmApplication:director_edit' director.id%}">Edit Director.</a>
-					</button>
-					<button id = "b4">
-						<a href="{% url 'filmApplication:delete_director' director.id%}">Delete Director.</a>
-					</button>
+						<a class="miniboton negro" href="{% url 'filmApplication:director_edit' director.id%}">Edit Director.</a>
+						<a class="miniboton negro" href="{% url 'filmApplication:delete_director' director.id%}">Delete Director.</a>
 		        </div>
 		    </div>
 	    </div>
@@ -74,9 +70,7 @@
 		    <div class="row">
 		        <div class="cell2"></div>
 		        <div class="cell2">
-		        	<button id = "b2"> 
-					    <p><a href="/filmApplication/directors/" title="Go back!">Go back</a></p>
-					</button>
+				        	<a <a class="boton negro" href="javascript:history.back(-1);" title="Go back!" class="boton azul">Go back</a>
 		        </div>
 		    </div>
 	    </div>
