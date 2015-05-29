@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{{titlehead}}{% endblock %}
-<spanvocab="http://schema.org/" typeof="Movie">
-
 {% block menu %}
     <div id="semiopaquemenu">
     <ul class="semiopaquemenu">
@@ -12,7 +10,9 @@
     <li><a href="/filmApplication/genres/">Genres</a></li>
     </ul><div class="bottombar"></div></div>
 {% endblock %}
+
 {% block content %}
+<span vocab="http://schema.org/" typeof="Movie">
     <div id="entry">
     <div id="entry_title">Movie:</div>
     <div id="entry_subtitle">{{ movie.name }}</div>
@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+
     <div id="entry_separator"></div>
     {% endif %}
     <div id="entry_subtitle">Information:</div>
@@ -36,15 +37,18 @@
         <div class="table">
             <div class="row">
                 <div class="cell1">Title: </div>
-                <div class="cell2">{{movie.title}}</div>
+                <div class="cell2">
+                     <span property="name">{{ movie.title }}</span>
+                </div>
             </div>
         </div>
     </div>
+
     <div id="entry_content">
         <div class="table">
             <div class="row">
                 <div class="cell1">Year: </div>
-                <div class="cell2">{{movie.year}}</div>
+                <div class="cell2"><span property="copyrightYear">{{ movie.year }}</span></div>
             </div>
         </div>
     </div>
@@ -52,7 +56,7 @@
         <div class="table">
             <div class="row">
                 <div class="cell1">Duration: </div>
-                <div class="cell2">{{movie.duration}}</div>
+                <div class="cell2"><span property="duration">{{movie.duration }}</span></div>
             </div>
         </div>
     </div>
@@ -60,7 +64,7 @@
         <div class="table">
             <div class="row">
                 <div class="cell1">Genre: </div>
-                <div class="cell2">{{movie.genre}}</div>
+                <div class="cell2"><span property="genre">{{ movie.genre }}</span></div>
             </div>
         </div>
     </div>
@@ -86,38 +90,56 @@
     </div>
     <div id="entry_footer"></div>
     </div>
+
     {% if movie.moviereview_set.all|length > 0 %}
-    <div id="entry">
+
+    <p id="entry">
     <div id="entry_title"> Reviews: </div>
     <div id="entry_content">
         <div class="table">
             <div class="row">
                 <div class="cell1">Rating value: </div>
+
                 <div class="cell1">
-                    <script>
-                        var i = 0
-                        var j = 0
-                        {% for review in movie.moviereview_set.all %}
-                            var i = i + {{ review.rating }}
-                            var j = j + 1
-                        {% endfor %}
-                         document.write(parseFloat(i/j).toFixed(2));
-                         document.write('\u002F');
-                         document.write(5);
-                    </script> </div>
+                  <span rel="aggregateRating">
+                      <p typeof="AggregateRating">
+                      {% with average as movie.average %}
+                      <span property="ratingValue">{{average}}</span>/5  with
+                      <span property="reviewCount">{{movie.moviereview_set.all|length }}</span> reviews
+                      {% endwith %}
+                    </p>
+                </span>
                 <div class="cell1"></div>
             </div>
         </div>
     </div>
+    </div>
+    </p>
+
     <div id="entry_separator"></div>
     <div id="entry_subtitle">Ratings:</div>
-     <div id="entry_content">
+    <div id="entry_content">
+      <ul rel="review">
              {% for review in movie.moviereview_set.all %}
-             <div class="table">
+            <li typeof="Review">
+            <div class="table">
             <div class="row">
-                <div class="smallcell">{{ review.rating }}</div>
-                <div class="smallcell">{{ review.date}}</div>
-                <div class="smallcell">{{ review.user}}</div>
+
+                <p rel="reviewRating" typeof="Rating">
+
+                    <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
+                    <span property="ratingValue">{{ review.rating }}</span> star{{ review.rating|pluralize }}
+                {% with RATING_CHOICES|last as best %}
+                    <span property="bestRating" content="{{ best.0 }}"></span>
+                {% endwith %}
+              </p>
+
+                <div class="smallcell">
+                    <p span property="datePublished">{{ review.date}}</span>
+                </div>
+                <div class="smallcell">
+                    <span property="author">{{ review.user }}</span>
+                </div></p>
                 <div class="normalcell">
                     {% if user == review.user %}
                                 <a class="miniboton negro" href="{% url 'filmApplication:review_edit' review.id %}">
@@ -130,9 +152,12 @@
                 </div>
             </div>
             </div>
-            <div id="entry_content_transparent">{{review.comment}}</div>
+            <div id="entry_content_transparent"> <p span property="description">{{review.comment}}</span></div></p>
             <div id="entry_separator"></div>
+          </li>
             {% endfor %}
+          </ul>
+        </span>
         </div>
         <div id="entry_footer"></div>
     </div>

@@ -58,7 +58,6 @@ class Movie(models.Model):
         return reverse('filmApplication:movie_detail',kwargs={'pk':self.pk})
 
 
-
 class Review(models.Model):
 
     RATING_CHOICES = ((1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5'))
@@ -76,5 +75,3 @@ class MovieReview(Review):
     movie = models.ForeignKey(Movie)
     def get_absolute_url(self):
         return reverse('filmApplication:movie_detail',kwargs={'pk':self.movie.pk})
-
-

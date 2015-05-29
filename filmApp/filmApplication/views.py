@@ -151,12 +151,24 @@ class APIGenreViewSet(viewsets.ModelViewSet):
 # MOVIE:
 class MovieDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
     model = Movie
-    template_name = 'movie_detail.html'
+    template_name ="movie_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(MovieDetail, self).get_context_data(**kwargs)
         context['RATING_CHOICES'] = Review.RATING_CHOICES
+        context['average'] = self.get_average_rating()
         return context
+
+    def get_average_rating(self):
+        total = 0
+        reviews = self.get_reviews()
+        for rev in reviews:
+            total += rev.rating
+
+        return total/len(reviews)
+
+    def get_reviews(self):
+        return MovieReview.objects.filter(movie__id=self.kwargs['pk'])
 
 
 class MovieCreate(LoginRequiredMixin,CreateView):
