@@ -15,7 +15,7 @@
 <span vocab="http://schema.org/" typeof="Movie">
     <div id="entry">
     <div id="entry_title">Movie:</div>
-    <div id="entry_subtitle">{{ movie.name }}</div>
+    <div id="entry_subtitle">{{ movie.title }}</div>
     {% if user.is_staff %}
     <div id="entry_content">
         <div class="table">
@@ -23,8 +23,8 @@
                 <div class="cell2">
                 </div>
                 <div class="cell1">
-                        <a class="miniboton negro" href="{% url 'filmApplication:movie_edit' movie.id %}">Edit movie.</a>
-                        <a class="miniboton negro" href="{% url 'filmApplication:delete_movie' movie.id%}">Delete movie.</a>
+                        <a class="miniboton negro" href="{% url 'filmApplication:movie_edit' movie.id %}">Edit movie</a>
+                        <a class="miniboton negro" href="{% url 'filmApplication:delete_movie' movie.id%}">Delete movie</a>
                 </div>
             </div>
         </div>
@@ -32,6 +32,7 @@
 
     <div id="entry_separator"></div>
     {% endif %}
+
     <div id="entry_subtitle">Information:</div>
     <div id="entry_content">
         <div class="table">
@@ -97,8 +98,7 @@
 
     {% if movie.moviereview_set.all|length > 0 %}
 
-    <div id="entry_separator"></div>
-    <p id="entry">
+    <div id="entry">
     <div id="entry_title"> Reviews: </div>
     <div id="entry_content">
         <div class="table">
@@ -118,12 +118,11 @@
         </div>
     </div>
     </div>
-    </p>
 
-    <div id="entry_separator"></div>
-    <div id="entry_subtitle">Ratings:</div>
+
+    <div id="entry_subtitle">Ratings and comments from users:</div>
     <div id="entry_content">
-      <ul rel="review">
+      <div rel="review">
              {% for review in movie.moviereview_set.all %}
             <li typeof="Review">
             <div class="table">
@@ -139,18 +138,18 @@
               </p>
 
                 <div class="smallcell">
-                    <p> <span property="datePublished">{{ review.date}}</span>
+                    <div> <span property="datePublished">{{ review.date}}</span>
                 </div>
                 <div class="smallcell">
                     <span property="author">{{ review.user }}</span>
-                </div></p>
+                </div></div>
                 <div class="normalcell">
                     {% if user == review.user %}
                                 <a class="miniboton negro" href="{% url 'filmApplication:review_edit' review.id %}">
-                                    Edit review.
+                                    Edit review
                                 </a>
                                 <a class="miniboton negro" href="{% url 'filmApplication:delete_review' review.id %}">
-                                    Delete review.
+                                    Delete review
                                 </a>
                     {% endif %}
                 </div>
@@ -160,7 +159,7 @@
             <div id="entry_separator"></div>
           </li>
             {% endfor %}
-          </ul>
+          </div>
         </span>
         </div>
         <div id="entry_footer"></div>
@@ -174,7 +173,7 @@
     {% csrf_token %}
         <div class="table">
             <div class="row">
-                <div class="cell1" style="vertical-align:middle">Message</div>
+                <div class="cell1" style="vertical-align:middle">Comment</div>
                 <div class="cell2"><textarea name="comment" id="comment" rows="4" style="width:500px; height:200px;">Write here a message.</textarea></div>
             </div>
             <div class="row">
@@ -197,6 +196,7 @@
     </div>
     <div id="entry_footer"></div>
     </div>
+
     <div id="entry">
     <div id="entry_title"> Go back </div>
     <div id="entry_content">

@@ -165,10 +165,12 @@ class MovieDetail(LoginRequiredMixin,DetailView,ConnegResponseMixin):
         for rev in reviews:
             total += rev.rating
 
-        av = total/float(len(reviews))
-        dec =  float("{0:.2f}".format(av))
-
-        return dec
+        if (len(reviews)) != 0:
+            av = total/float(len(reviews))
+            dec =  float("{0:.2f}".format(av))
+            return dec
+        else:
+            return 2.5
 
     def get_reviews(self):
         return MovieReview.objects.filter(movie__id=self.kwargs['pk'])
