@@ -72,8 +72,10 @@
         <div class="table">
             <div class="row">
                 <div class="cell1">Director: </div>
-                <div class="cell2"><a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="color:blue">{{movie.director}}</a></div>
-            </div>
+                <div  property="director"  typeof="Person">
+                  <div class="cell2"><span property="name"><a href="{% url 'filmApplication:director_detail' movie.director.id %}" style="color:blue">{{movie.director}}</a></span></div>
+                </div>
+          </div>
         </div>
     </div>
     <div id="entry_content">
@@ -82,7 +84,9 @@
                 <div class="cell1">Actors:</div>
                 <div class="cell2">
                 {% for actor in movie.actors.all %}
-                    <div id="entry_content_transparent"><a href="{% url 'filmApplication:actor_detail' actor.id %}" style="color:blue">{{actor.name}}</a></div>
+                <div property="actor"  typeof="Person">
+                    <div id="entry_content_transparent"><span property="name"><a href="{% url 'filmApplication:actor_detail' actor.id %}" style="color:blue">{{actor.name}}</a></span></div>
+                </div>
                 {% endfor %}
                 </div>
             </div>
@@ -93,13 +97,13 @@
 
     {% if movie.moviereview_set.all|length > 0 %}
 
+    <div id="entry_separator"></div>
     <p id="entry">
     <div id="entry_title"> Reviews: </div>
     <div id="entry_content">
         <div class="table">
             <div class="row">
                 <div class="cell1">Rating value: </div>
-
                 <div class="cell1">
                   <span rel="aggregateRating">
                       <p typeof="AggregateRating">
@@ -135,7 +139,7 @@
               </p>
 
                 <div class="smallcell">
-                    <p span property="datePublished">{{ review.date}}</span>
+                    <p> <span property="datePublished">{{ review.date}}</span>
                 </div>
                 <div class="smallcell">
                     <span property="author">{{ review.user }}</span>
